@@ -175,36 +175,76 @@
 
 // optimal code
 
-import java.util.HashMap;
+// import java.util.HashMap;
 
-class Solution 
-{
+// class Solution 
+// {
 
-    public int longSubstring(String s , int k)
-    {
-        int maxlen = 0;
-        HashMap<Character , Integer > map = new HashMap<>();
-        int n = s.length();
-        int r = 0 , l =0;
-        while(r  < n )
-        { 
-            map.put(s.charAt(r), map.getOrDefault(s.charAt(r), 0)+1);
+//     public int longSubstring(String s , int k)
+//     {
+//         int maxlen = 0;
+//         HashMap<Character , Integer > map = new HashMap<>();
+//         int n = s.length();
+//         int r = 0 , l =0;
+//         while(r  < n )
+//         { 
+//             map.put(s.charAt(r), map.getOrDefault(s.charAt(r), 0)+1);
 
-            if(map.size() > k)
-            {
-                map.put(s.charAt(l) , map.get(s.charAt(l)) -1);
-                if(map.get(s.charAt(l)) == 0)
-                    map.remove(s.charAt(l));
-                l++;
-            }
-            if(map.size()<=k)
-                maxlen = Math.max(r-l+1 , maxlen);
-                r++;
-        }
-        return maxlen;
+//             if(map.size() > k)
+//             {
+//                 map.put(s.charAt(l) , map.get(s.charAt(l)) -1);
+//                 if(map.get(s.charAt(l)) == 0)
+//                     map.remove(s.charAt(l));
+//                 l++;
+//             }
+//             if(map.size()<=k)
+//                 maxlen = Math.max(r-l+1 , maxlen);
+//                 r++;
+//         }
+//         return maxlen;
+//     }
+//     public static void main(String[] args) {
+//         String s = "hello";
+//         System.out.println(new Solution().longSubstring(s,3));
+//     }
+// }
+
+import java.util.*;
+class Solution {
+    LinkedList<Integer>list;
+    public void initializeHeap() {
+        list = new LinkedList<>();
+    }
+
+    public void insert(int key) {
+        if(list.peekFirst()!=null && list.peekFirst()>key)
+            list.add(0,key);
+    }
+
+    public void changeKey(int index, int newVal) {
+        list.remove(index);
+        list.add(index,newVal);
+    }
+
+    public void extractMin() {
+        list.poll();
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public int getMin() {
+       return list.peekFirst();
+    }
+
+    public int heapSize() {
+        return list.size();
     }
     public static void main(String[] args) {
-        String s = "hello";
-        System.out.println(new Solution().longSubstring(s,3));
+        Solution obj = new Solution();
+        obj.initializeHeap();
+        obj.insert(1);
+        
     }
 }
