@@ -1,4 +1,4 @@
-// import java.util.*;
+
 // class Solution
 // {
 // 	public static void main(String args[])
@@ -422,72 +422,177 @@
 // }
 
 
-class Solution {
-    public void gameOfLife(int[][] board) {
-       int n = board.length;
-       int m = board[0].length;
-       for(int i = 0 ; i < n ; i++) 
-       {
+// class Solution {
+//     public void gameOfLife(int[][] board) {
+//        int n = board.length;
+//        int m = board[0].length;
+//        for(int i = 0 ; i < n ; i++) 
+//        {
         
-        for(int j = 0 ; j < m ; j++)
-        {
-            int count = 0;
-                if(j-1 >= 0 && Math.abs( board[i][j-1]) ==1 )
-                    count++;
-                if( (i - 1 >= 0  && j - 1 >= 0)&& Math.abs( board[i-1][j - 1]) ==1)
-                    count++;
-                if(i - 1 >= 0 && Math.abs( board[i-1][j]) ==1)
-                    count++;
-                if( ((i-1>=0) && j+1  < m ) && Math.abs( board[i-1][j+1]) == 1 )
-                    count++;
-                if(  (j+1 < m) &&  Math.abs( board[i][j+1]) ==1) 
-                    count++;
-                if( (i+1 < n && j-1 >=0) && Math.abs( board[i+1][j-1] )== 1)
-                    count++;
-                if((i+1 <n) && Math.abs( board[i+1][j]) ==  1)
-                    count++;
-                if((i+1 < n && j+1 < m) && Math.abs( board[i+1][j+1]) == 1)
-                    count++;
+//         for(int j = 0 ; j < m ; j++)
+//         {
+//             int count = 0;
+//                 if(j-1 >= 0 && Math.abs( board[i][j-1]) ==1 )
+//                     count++;
+//                 if( (i - 1 >= 0  && j - 1 >= 0)&& Math.abs( board[i-1][j - 1]) ==1)
+//                     count++;
+//                 if(i - 1 >= 0 && Math.abs( board[i-1][j]) ==1)
+//                     count++;
+//                 if( ((i-1>=0) && j+1  < m ) && Math.abs( board[i-1][j+1]) == 1 )
+//                     count++;
+//                 if(  (j+1 < m) &&  Math.abs( board[i][j+1]) ==1) 
+//                     count++;
+//                 if( (i+1 < n && j-1 >=0) && Math.abs( board[i+1][j-1] )== 1)
+//                     count++;
+//                 if((i+1 <n) && Math.abs( board[i+1][j]) ==  1)
+//                     count++;
+//                 if((i+1 < n && j+1 < m) && Math.abs( board[i+1][j+1]) == 1)
+//                     count++;
                 
-                if(count < 2 || count > 3)
-                    board[i][j] = -1;
-                else if(count ==3 && board[i][j] ==0)//dead already , become live later
-                    board[i][j] = 2;
+//                 if(count < 2 || count > 3)
+//                     board[i][j] = -1;
+//                 else if(count ==3 && board[i][j] ==0)//dead already , become live later
+//                     board[i][j] = 2;
                 
-        }
-       }
-       for(int i = 0 ;  i < n ; i++)
-        {
-            for(int j = 0 ; j < m ; j++)
-            {
-                if(board[i][j]<0)
-                    board[i][j]  = 0;
-                if(board[i][j] > 0)
-                    board[i][j] = 1;
-            }
-        }
-    }
+//         }
+//        }
+//        for(int i = 0 ;  i < n ; i++)
+//         {
+//             for(int j = 0 ; j < m ; j++)
+//             {
+//                 if(board[i][j]<0)
+//                     board[i][j]  = 0;
+//                 if(board[i][j] > 0)
+//                     board[i][j] = 1;
+//             }
+//         }
+//     }
 
+//     public static void main(String args[])
+//     {
+//         int board[][] = {{0,1,0},{0,0,1},{1,1,1},{0,0,0}};
+//         for(int i = 0 ; i < board.length ; i ++)
+//         {
+//             for(int j = 0 ; j < board[0].length ; j++)
+//             {
+//                 System.out.print(board[i][j] +" ");
+//             }
+//             System.out.println();
+//         }
+//         System.out.println("------------------------------------");
+//         new Solution().gameOfLife(board);
+//         for(int i = 0 ; i < board.length ; i ++)
+//         {
+//             for(int j = 0 ; j < board[0].length ; j++)
+//             {
+//                 System.out.print(board[i][j] +" ");
+//             }
+//             System.out.println();
+//         }
+//     }
+// }
+
+// class Solution {
+//     public int maxBalancedShipments(int[] weight) {
+//         int count = 0;
+//         int n = weight.length;
+//         int l = 0 , r = 1;
+//         int max = Integer.MIN_VALUE;
+//         while( r < n)
+//             {
+    
+//                 if(weight[r] > weight[l] )
+//                 {
+//                     count++;
+//                     r++;
+//                     l = r -1;
+//                     continue;
+//                 }
+//                 r++;
+//             }
+            
+//         return count ;
+//     }
+//     public static void main(String args[])
+//     {
+//         int weight[] = {2,5,1,4,3};
+//         System.out.println(new Solution().maxBalancedShipments(weight));
+//     }
+// }
+
+// class Solution {
+//     public boolean isTrionic(int[] nums) {
+        
+//         int n = nums.length;
+//         if (n < 3) return false; 
+
+//         int i = 0;
+        
+//         while (i < n - 1 && nums[i] < nums[i+1]) i++;
+//         if (i == 0) return false;
+
+//         int p = i;
+        
+//         while (p < n - 1 && nums[p] > nums[p+1]) p++;
+//         if (p == i) return false; 
+
+//         int q = p;
+        
+//         while (q < n - 1 && nums[q] < nums[q+1]) q++;
+//         if (q == p) return false;
+
+        
+//         return q == n - 1;
+//     }
+//     public static void main(String[] args) {
+//         int nums[] = {1,3,5,4,2};
+//         System.out.println(new Solution().isTrionic(nums));
+
+//     }
+// }
+
+// import java.util.ArrayList;
+// import java.util.HashMap;
+// import java.util.List;
+
+// class Solution 
+// {
+//     public static void main(String args[])
+//     {
+
+//     }
+//      public int[] topKFrequent(int[] nums, int k) {
+//         HashMap<Integer , Integer> map = new HashMap<>();
+//         List<Integer> list = new ArrayList<>();
+//         for(int n : nums)
+//         {
+//                 map.put(n , map.getOrDefault( n , 0) +1 ); 
+//         }
+        
+
+//     }
+// }
+
+import java.util.*;
+class Solution 
+{
+       public int[] topKFrequent(int[] nums, int k) {
+            int arr[] = new int[k];
+            HashMap<Integer,Integer> map = new HashMap<>();
+            for(int x : nums)
+            {
+                    map.put( x , map.getOrDefault(x, 0) + 1);
+            }
+            Collections.sort(map);
+            
+            return arr;
+    }
     public static void main(String args[])
     {
-        int board[][] = {{0,1,0},{0,0,1},{1,1,1},{0,0,0}};
-        for(int i = 0 ; i < board.length ; i ++)
-        {
-            for(int j = 0 ; j < board[0].length ; j++)
-            {
-                System.out.print(board[i][j] +" ");
-            }
-            System.out.println();
-        }
-        System.out.println("------------------------------------");
-        new Solution().gameOfLife(board);
-        for(int i = 0 ; i < board.length ; i ++)
-        {
-            for(int j = 0 ; j < board[0].length ; j++)
-            {
-                System.out.print(board[i][j] +" ");
-            }
-            System.out.println();
-        }
+            int nums[] ={1,1,1,2,2,3};
+            int k = 2;
+            int res[] = new Solution().topKFrequent(nums, k);
+            for(int r : res)
+                System.out.print(r+ " ");
     }
 }
