@@ -209,42 +209,44 @@
 //     }
 // }
 
-import java.util.*;
-class Solution {
-    LinkedList<Integer>list;
-    public void initializeHeap() {
-        list = new LinkedList<>();
-    }
+// import java.util.*;
+// class Solution {
+//     LinkedList<Integer>list;
+//     public void initializeHeap() {
+//         list = new LinkedList<>();
+//     }
 
-    public void insert(int key) {
-        if(list.peekFirst()!=null && list.peekFirst()>key)
-            list.add(0,key);
-    }
+//     public void insert(int key) {
+//         if(list.peekFirst()!=null && list.peekFirst()>key)
+//             list.add(0,key);
+//     }
 
-    public void changeKey(int index, int newVal) {
-        list.remove(index);
-        list.add(index,newVal);
-    }
+//     public void changeKey(int index, int newVal) {
+//         list.remove(index);
+//         list.add(index,newVal);
+//     }
 
-    public void extractMin() {
-        list.poll();
-    }
+//     public void extractMin() {
+//         list.poll();
+//     }
 
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
+//     public boolean isEmpty() {
+//         return list.isEmpty();
+//     }
 
-    public int getMin() {
-       return list.peekFirst();
-    }
+//     public int getMin() {
+//        return list.peekFirst();
+//     }
 
-    public int heapSize() {
-        return list.size();
-    }
-    public static void main(String[] args) {
-        Solution obj = new Solution();
-        obj.initializeHeap();
-        obj.insert(1);
+//     public int heapSize() {
+//         return list.size();
+//     }
+//     public static void main(String[] args) {
+//         Solution obj = new Solution();
+//         obj.initializeHeap();
+//         obj.insert(1);
         
-    }
-}
+//     }
+// }
+
+// heap data structure
