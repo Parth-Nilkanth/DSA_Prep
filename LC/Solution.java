@@ -573,26 +573,39 @@
 //     }
 // }
 
-import java.util.*;
+// import java.util.*;
+// class Solution 
+// {
+//        public int[] topKFrequent(int[] nums, int k) {
+//             int arr[] = new int[k];
+//             HashMap<Integer,Integer> map = new HashMap<>();
+//             for(int x : nums)
+//             {
+//                     map.put( x , map.getOrDefault(x, 0) + 1);
+//             }
+//             Collections.sort(map);
+            
+//             return arr;
+//     }
+//     public static void main(String args[])
+//     {
+//             int nums[] ={1,1,1,2,2,3};
+//             int k = 2;
+//             int res[] = new Solution().topKFrequent(nums, k);
+//             for(int r : res)
+//                 System.out.print(r+ " ");
+//     }
+// }
+
 class Solution 
 {
-       public int[] topKFrequent(int[] nums, int k) {
-            int arr[] = new int[k];
-            HashMap<Integer,Integer> map = new HashMap<>();
-            for(int x : nums)
-            {
-                    map.put( x , map.getOrDefault(x, 0) + 1);
-            }
-            Collections.sort(map);
-            
-            return arr;
-    }
-    public static void main(String args[])
-    {
-            int nums[] ={1,1,1,2,2,3};
-            int k = 2;
-            int res[] = new Solution().topKFrequent(nums, k);
-            for(int r : res)
-                System.out.print(r+ " ");
-    }
+          public boolean isPowerOfTwo(int n) {
+                System.out.println();
+                return true;
+        }
+        public static void main(String args[])
+        {
+                int n = 1;
+                System.out.println(new Solution().isPowerOfTwo(1));
+        }
 }
