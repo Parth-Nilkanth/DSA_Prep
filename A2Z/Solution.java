@@ -1,3 +1,7 @@
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 // import java.util.HashMap;
 // class LRUCache {    
 //     HashMap<Integer,Integer> cache;
@@ -250,9 +254,18 @@
 // }
 
 // heap data structure
+// there are twio types of heaps: 1) min heap 2) max heap
 class Solution {
-    public static void main(String args[])
+    public static void main(String args[]) throws Exception
     {
-        
+            // Implementing heap using arrays
+            int arr[] = new int[6];
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            for(int i = 0 ; i < arr.length ; i ++)
+                arr[i] = Integer.parseInt(br.readLine());
+       
+
+
+
     }
 }
