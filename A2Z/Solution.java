@@ -1,8 +1,4 @@
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-// import java.util.HashMap;
 // class LRUCache {    
 //     HashMap<Integer,Integer> cache;
 //     public LRUCache(int capacity) {
@@ -255,17 +251,204 @@ import java.io.InputStreamReader;
 
 // heap data structure
 // there are twio types of heaps: 1) min heap 2) max heap
+// java heap implementation
+/*
+import java.util.ArrayList;
+class MinHeap {
+    private ArrayList<Integer> heap;
+
+    public MinHeap() {
+        heap = new ArrayList<>();
+    }
+
+    public int parent(int i)
+    {
+        return (i-1)/2; //return index of parent
+    }
+
+    public int leftChild(int i )
+    {
+        return 2*i+1; //return index of left child
+    }
+
+    public int rightChild(int i )
+    {
+        return (2*i+2);//return index of right child
+    }
+    
+    // function to swap elements at given indices
+    public void swap(int i , int j)
+    {
+        int temp = heap.get(i);
+        heap.set(i , heap.get(j));
+        heap.set(j , temp);
+    }
+
+    public void insert(int value){
+        // add element at the end
+        heap.add(value);
+        // return index of last element i.e currently added element
+        int currentIndex = heap.size()-1;
+        // buble up to maintain the heap property
+        while(currentIndex > 0 && heap.get(currentIndex) < heap.get(parent(currentIndex))){
+                // swap parent and current node
+            swap(currentIndex , parent(currentIndex));
+            // move up to the parent
+            currentIndex = parent(currentIndex);
+        }
+    }
+
+    // extract min
+    public int extractMin()
+    {
+        // minimum value is always the root
+        if(heap.isEmpty())
+        {
+            throw new RuntimeException("Heap is Empty");
+        }
+        int min = heap.get(0);
+        // retrieve and remove last element of the heap
+        int last = heap.remove(heap.size()-1);
+        if(!heap.isEmpty())
+        {
+            heap.set(0,last);
+            int currentIndex = 0;
+            while(true)
+            {
+                int left = leftChild(currentIndex);
+                int right = rightChild(currentIndex);
+                int smallest = currentIndex;
+                //   find smallest value among left , right and current node
+                if(left < heap.size() && heap.get(left) < heap.get(smallest))
+                    smallest = left;
+                if(right < heap.size() && heap.get(right) < heap.get(smallest))
+                    smallest = right;
+                if(smallest == currentIndex)
+                    break;
+
+                swap(currentIndex , smallest);
+                currentIndex = smallest;
+            }
+        }
+        return min;
+    }
+
+}
+
+class MaxHeap 
+{
+    
+}
+
 class Solution {
     public static void main(String args[]) throws Exception
     {
-            // Implementing heap using arrays
-            int arr[] = new int[6];
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            for(int i = 0 ; i < arr.length ; i ++)
-                arr[i] = Integer.parseInt(br.readLine());
-       
-
-
-
+        MinHeap heap = new MinHeap();
+        heap.insert(10);
+        heap.insert(5);
+        heap.insert(15);
+        heap.insert(20);
+        heap.insert(25);
+        System.out.println("Extracted min :"+heap.extractMin());
+        System.out.println("Extracted min :"+heap.extractMin());
+        System.out.println("Extracted min :"+heap.extractMin());
+        System.out.println("Extracted min :"+heap.extractMin());
+        System.out.println("Extracted min :"+heap.extractMin());
     }
-} 
+}
+*/
+import java.util.ArrayList;
+class MaxHeap{
+
+	ArrayList<Integer> heap;
+
+	MaxHeap(){
+		heap = new ArrayList<>();
+	}
+	
+	public int getParent(int i ){
+		return ( i - 1 ) / 2;
+	}
+
+	public int getRightChild(int i ){
+		return 2 * i + 2;
+	}
+
+	public int getLeftChild(int i ) {
+		return 2 * i + 1;
+	}
+
+	public void swap(int i , int j){ //function to swap two values of given indices
+		int temp = heap.get(i);
+		heap.set( i , heap.get(j));
+		heap.set( j , temp );
+	}
+
+	public void insert(int value ){
+		heap.add(value);
+		int currentIndex = heap.size() - 1;
+
+		
+			while(currentIndex > 0 && heap.get(currentIndex) > heap.get(getParent(currentIndex) ) )
+			{
+				swap( currentIndex , getParent(currentIndex) ) ;
+				currentIndex = getParent(currentIndex);
+			}
+		System.out.println("Element is inserted ");
+	}
+
+
+	public int extractMax()
+	{
+		if(heap.isEmpty()) {
+			System.out.println("Heap is empty");
+				return -1;
+		}
+		int max = heap.get(0);//root is always the maximum
+	 	int last = heap.remove(heap.size() - 1);
+		if(!heap.isEmpty() ) 
+		{
+			heap.set(0 , last);
+			int currentIndex = 0;
+			while(true) 
+			{
+				int left = getLeftChild(currentIndex);
+				int right = getRightChild(currentIndex);
+				int largest = currentIndex; //as a heap property root should be largest , initially consider this as largest and then check for children whether it is greater
+
+				if(left < heap.size() && heap.get(left) > heap.get(largest)) 
+					largest = left;
+				if(right  < heap.size() && heap.get(right) > heap.get(largest) ) 
+						largest = right;
+
+				if(largest == currentIndex)
+						break;
+
+				swap(currentIndex , largest );
+
+				currentIndex = largest;
+			}
+		}
+		System.out.println("Extracted max ; ");
+		return max;
+	}
+
+}
+class Solution{
+	public static void main(String args[] )
+	{
+		System.out.println("Creation of heap ");
+		MaxHeap heap = new MaxHeap();
+		heap.insert(10);
+		heap.insert(5);
+		heap.insert(15);
+		heap.insert(20);
+		heap.insert(25);
+		System.out.println(heap.extractMax());
+		System.out.println(heap.extractMax());
+		System.out.println(heap.extractMax());
+		System.out.println(heap.extractMax());
+		System.out.println(heap.extractMax());
+
+	}
+}

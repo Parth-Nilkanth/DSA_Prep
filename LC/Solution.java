@@ -597,15 +597,16 @@
 //     }
 // }
 
-class Solution 
-{
-          public boolean isPowerOfTwo(int n) {
-                System.out.println();
-                return true;
-        }
-        public static void main(String args[])
-        {
-                int n = 1;
-                System.out.println(new Solution().isPowerOfTwo(1));
-        }
-}
+// class Solution 
+// {
+//           public boolean isPowerOfTwo(int n) {
+//                 System.out.println();
+//                 return true;
+//         }
+//         public static void main(String args[])
+//         {
+//                 int n = 1;
+//                 System.out.println(new Solution().isPowerOfTwo(1));
+//         }
+// }
+
