@@ -610,3 +610,33 @@
 //         }
 // }
 
+class Solution {
+    int gcd(int n1 , int n2)
+    {
+        int num  = Math.min(n1 , n2);
+        int gcd = 1;
+        for(int i = 1 ; i <= num ; i++ )
+            {
+                    if(n1%i==0 && n2%i==0)
+                            gcd = i;
+            }
+        return gcd;
+    }
+    public int gcdOfOddEvenSums(int n) {
+        int count = n*2;
+        int sumOdd = 0;
+        int sumEven = 0;
+        for(int i = 1 ; count>0; i++)
+            {
+                if(i%2==0)
+                        sumEven+=i;
+                else
+                    sumOdd+=i;
+                count--;
+            }
+        return gcd(sumOdd ,sumEven);
+    }
+    public static void main(String[] args) {
+        System.out.println(new Solution().gcdOfOddEvenSums(5));
+    }
+}
