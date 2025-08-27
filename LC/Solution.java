@@ -1,5 +1,4 @@
 
-// class Solution
 // {
 // 	public static void main(String args[])
 // 	{
@@ -610,33 +609,87 @@
 //         }
 // }
 
+// class Solution {
+//     int gcd(int n1 , int n2)
+//     {
+//         int num  = Math.min(n1 , n2);
+//         int gcd = 1;
+//         for(int i = 1 ; i <= num ; i++ )
+//             {
+//                     if(n1%i==0 && n2%i==0)
+//                             gcd = i;
+//             }
+//         return gcd;
+//     }
+//     public int gcdOfOddEvenSums(int n) {
+//         int count = n*2;
+//         int sumOdd = 0;
+//         int sumEven = 0;
+//         for(int i = 1 ; count>0; i++)
+//             {
+//                 if(i%2==0)
+//                         sumEven+=i;
+//                 else
+//                     sumOdd+=i;
+//                 count--;
+//             }
+//         return gcd(sumOdd ,sumEven);
+//     }
+//     public static void main(String[] args) {
+//         System.out.println(new Solution().gcdOfOddEvenSums(5));
+//     }
+// }
+
 class Solution {
-    int gcd(int n1 , int n2)
+    public int[] findDiagonalOrder(int[][] mat) {
+                int rows = mat.length;
+        int cols = mat[0].length;
+        int res[] = new int[rows*cols];
+        boolean turnup = true;
+        int r = 0 , c= 0;
+        int i = 0;
+        while(i < res.length)
+        {
+            // go upward
+            if(turnup)
+            {
+                while(r>=0 && c < cols)
+                {
+                    res[i++] = mat[r--][c++];
+                }
+                
+                turnup = false;
+            }
+            // go downward
+            else 
+            {
+                    while(r< rows && c>=0)
+                    {
+                        res[i++] = mat[r++][c--];
+                    }
+                turnup = true;
+            }
+        }
+        return res;
+ 
+    }
+    public static void main(String args[])
     {
-        int num  = Math.min(n1 , n2);
-        int gcd = 1;
-        for(int i = 1 ; i <= num ; i++ )
-            {
-                    if(n1%i==0 && n2%i==0)
-                            gcd = i;
-            }
-        return gcd;
+        Solution s = new Solution();
+        int arr[][]={
+            {1,2,3},
+            {4,5,6},
+            {7,8,9}
+        };
+        int res[] = new Solution().findDiagonalOrder(arr);
+        print_arr(res);
+        
     }
-    public int gcdOfOddEvenSums(int n) {
-        int count = n*2;
-        int sumOdd = 0;
-        int sumEven = 0;
-        for(int i = 1 ; count>0; i++)
-            {
-                if(i%2==0)
-                        sumEven+=i;
-                else
-                    sumOdd+=i;
-                count--;
-            }
-        return gcd(sumOdd ,sumEven);
-    }
-    public static void main(String[] args) {
-        System.out.println(new Solution().gcdOfOddEvenSums(5));
+    static void print_arr(int arr[])
+    {
+        for(int x : arr)
+            System.out.print(x+" ");
+        System.out.println();
     }
 }
+
