@@ -450,42 +450,74 @@
 // }
 
 
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+// import java.util.*;
+// import java.lang.*;
+// import java.io.*;
 
-class codechef 
+// class codechef 
+// {
+// 	public static void main (String[] args) throws java.lang.Exception
+// 	{
+// 		// your code goes here
+// 		Scanner sc = new Scanner(System.in);
+// 		int tc = sc.nextInt();
+		
+// 		while( tc -- > 0 )
+// 		{
+// 		    String s = sc.next();
+// 		    int n = s.length();
+//             boolean flag = false;
+// 		    if(s.charAt(0) == '<' && s.charAt(1) == '/' && s.charAt(n-1)=='>')
+// 		        {
+// 		            for(int i = 2 ; i < n-1 ; i++)
+// 		            {
+// 		                if( (s.charAt(i) >= 65 && s.charAt(i) <= 90) || s.charAt(i) >= 97 && s.charAt(i) <= 122)
+// 		                    continue;
+// 		                else 
+// 		                {
+//                                 flag = true;
+//                                 break;
+// 		                }
+// 		            }
+// 		        } 
+//                 if(flag)
+//                     System.out.println("Error");
+//                 else 
+//                     System.out.println("Success");
+// 		}
+        
+
+// 	}
+// }
+
+import java.util.*;
+class Codechef
 {
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		// your code goes here
-		Scanner sc = new Scanner(System.in);
-		int tc = sc.nextInt();
-		
-		while( tc -- > 0 )
-		{
-		    String s = sc.next();
-		    int n = s.length();
-            boolean flag = false;
-		    if(s.charAt(0) == '<' && s.charAt(1) == '/' && s.charAt(n-1)=='>')
-		        {
-		            for(int i = 2 ; i < n-1 ; i++)
-		            {
-		                if( (s.charAt(i) >= 65 && s.charAt(i) <= 90) || s.charAt(i) >= 97 && s.charAt(i) <= 122)
-		                    continue;
-		                else 
-		                {
-                                flag = true;
-                                break;
-		                }
-		            }
-		        } 
-                if(flag)
-                    System.out.println("Error");
-                else 
-                    System.out.println("Success");
-		}
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        while( tc -- > 0 )
+        {
+          
+          int n = sc.nextInt();
+          Map<String,Integer> map = new HashMap<>();
+          for(int i = 0 ;  i < n * 3 ; i ++)
+          {
+              String s = sc.next();
+              int c = sc.nextInt();
+              map.put( s ,map.getOrDefault(s , 0 )+c);  
+          }
+          List<Integer> submissions = new ArrayList<>();
+          for(int i : map.values())
+             submissions.add(i);
+         Collections.sort(submissions);
+         for(int i : submissions)
+            System.out.print(i+" ");
         
-
+        System.out.println();
+        
+        }
 	}
 }

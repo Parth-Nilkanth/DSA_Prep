@@ -640,56 +640,95 @@
 //     }
 // }
 
-class Solution {
-    public int[] findDiagonalOrder(int[][] mat) {
-                int rows = mat.length;
-        int cols = mat[0].length;
-        int res[] = new int[rows*cols];
-        boolean turnup = true;
-        int r = 0 , c= 0;
-        int i = 0;
-        while(i < res.length)
-        {
-            // go upward
-            if(turnup)
-            {
-                while(r>=0 && c < cols)
-                {
-                    res[i++] = mat[r--][c++];
-                }
+// class Solution {
+//     public int[] findDiagonalOrder(int[][] mat) {
+//                 int rows = mat.length;
+//         int cols = mat[0].length;
+//         int res[] = new int[rows*cols];
+//         boolean turnup = true;
+//         int r = 0 , c= 0;
+//         int i = 0;
+//         while(i < res.length)
+//         {
+//             // go upward
+//             if(turnup)
+//             {
+//                 while(r>=0 && c < cols)
+//                 {
+//                     res[i++] = mat[r--][c++];
+//                 }
                 
-                turnup = false;
-            }
-            // go downward
-            else 
-            {
-                    while(r< rows && c>=0)
-                    {
-                        res[i++] = mat[r++][c--];
-                    }
-                turnup = true;
-            }
-        }
-        return res;
+//                 turnup = false;
+//             }
+//             // go downward
+//             else 
+//             {
+//                     while(r< rows && c>=0)
+//                     {
+//                         res[i++] = mat[r++][c--];
+//                     }
+//                 turnup = true;
+//             }
+//         }
+//         return res;
  
-    }
-    public static void main(String args[])
-    {
-        Solution s = new Solution();
-        int arr[][]={
-            {1,2,3},
-            {4,5,6},
-            {7,8,9}
-        };
-        int res[] = new Solution().findDiagonalOrder(arr);
-        print_arr(res);
+//     }
+//     public static void main(String args[])
+//     {
+//         Solution s = new Solution();
+//         int arr[][]={
+//             {1,2,3},
+//             {4,5,6},
+//             {7,8,9}
+//         };
+//         int res[] = new Solution().findDiagonalOrder(arr);
+//         print_arr(res);
         
-    }
-    static void print_arr(int arr[])
+//     }
+//     static void print_arr(int arr[])
+//     {
+//         for(int x : arr)
+//             System.out.print(x+" ");
+//         System.out.println();
+//     }
+// }
+import java.util.*;
+class Solution {
+    static void printarr(int arr[])
     {
-        for(int x : arr)
-            System.out.print(x+" ");
-        System.out.println();
+            for(int x : arr)
+                System.out.print(x+" ");
+            System.out.println();
+    }
+    public int getLeastFrequentDigit(int n) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int temp = n;
+        while( temp > 0)
+        {
+            int d = temp % 10;
+            map.put( d , map.getOrDefault(d, 0)+1);
+            temp = temp/10;
+        }
+        int min = Integer.MAX_VALUE;
+        for(int i : map.keySet())
+        {
+                min = Math.min(  min , map.get(i) );
+        }
+        
+        for(int i = 0 ; i <=9 ; i++)
+        {
+            if(!map.containsKey(i)) 
+                continue;
+            else 
+                if(map.get(i)== min ){
+                    min =i;
+                break;
+                }
+        }
+        return min;
+    }
+    public static void main(String[] args)
+    {
+        System.out.println(new Solution().getLeastFrequentDigit(723344511));
     }
 }
-
