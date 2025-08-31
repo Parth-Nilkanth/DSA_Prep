@@ -692,43 +692,124 @@
 //         System.out.println();
 //     }
 // }
-import java.util.*;
-class Solution {
-    static void printarr(int arr[])
-    {
-            for(int x : arr)
-                System.out.print(x+" ");
-            System.out.println();
-    }
-    public int getLeastFrequentDigit(int n) {
-        HashMap<Integer,Integer> map = new HashMap<>();
-        int temp = n;
-        while( temp > 0)
-        {
-            int d = temp % 10;
-            map.put( d , map.getOrDefault(d, 0)+1);
-            temp = temp/10;
-        }
-        int min = Integer.MAX_VALUE;
-        for(int i : map.keySet())
-        {
-                min = Math.min(  min , map.get(i) );
-        }
+
+// import java.util.*;
+// class Solution {
+//     static void printarr(int arr[])
+//     {
+//             for(int x : arr)
+//                 System.out.print(x+" ");
+//             System.out.println();
+//     }
+//     public int getLeastFrequentDigit(int n) {
+//         HashMap<Integer,Integer> map = new HashMap<>();
+//         int temp = n;
+//         while( temp > 0)
+//         {
+//             int d = temp % 10;
+//             map.put( d , map.getOrDefault(d, 0)+1);
+//             temp = temp/10;
+//         }
+//         int min = Integer.MAX_VALUE;
+//         for(int i : map.keySet())
+//         {
+//                 min = Math.min(  min , map.get(i) );
+//         }
         
-        for(int i = 0 ; i <=9 ; i++)
-        {
-            if(!map.containsKey(i)) 
-                continue;
-            else 
-                if(map.get(i)== min ){
-                    min =i;
-                break;
-                }
-        }
-        return min;
+//         for(int i = 0 ; i <=9 ; i++)
+//         {
+//             if(!map.containsKey(i)) 
+//                 continue;
+//             else 
+//                 if(map.get(i)== min ){
+//                     min =i;
+//                 break;
+//                 }
+//         }
+//         return min;
+//     }
+//     public static void main(String[] args)
+//     {
+//         System.out.println(new Solution().getLeastFrequentDigit(723344511));
+//     }
+// }
+
+
+// // contest :q1
+// import java.util.HashSet;
+
+// class Solution 
+// {
+// public int[] recoverOrder(int[] order, int[] friends) {
+//         HashSet<Integer> set = new HashSet<>();
+//         for(int x : friends)
+//                 set.add(x);
+//         int res[] = new int[friends.length];
+//         int i = 0;
+//         for(int x : order)
+//             {
+//                 if(set.contains(x))
+//                     res[i++] = x;
+//             }
+//         return res;
+//     }
+//     public static void main(String[] args)
+//     {
+//         int orders[] = {1,4,5,3,2};
+//         int friends[] = {2,5};
+//         int res[] = new Solution().recoverOrder(orders, friends);
+//         for(int x : res)
+//             System.out.print(x+" ");
+//     }
+// }
+
+// contest Q2
+class Solution {
+    // // brute force
+    public long maxProduct(int[] nums) {
+     long maximum = 0;
+     int n = nums.length;
+     for(int i = 0 ; i < n -1; i++)
+         {
+             for(int j = i+1  ;j < n ; j++)
+                 {
+                     if((long)nums[i] * nums[j] > maximum && (nums[i] & nums[j]) ==0 )
+                     {
+                         maximum = (long)nums[i] * nums[j];
+                     }
+                 }
+         }
+    return maximum;
     }
-    public static void main(String[] args)
-    {
-        System.out.println(new Solution().getLeastFrequentDigit(723344511));
+
+    // optimal
+    // public long maxProduct(int[] nums) {
+    //     Arrays.sort(nums);
+        
+    //     int n = nums.length;
+    //     int r = n-1 , l = n-2;
+    //     long maximum = 0;
+    //     while(r>=0)
+    //     {
+    //             if((long)nums[r]*nums[l] > maximum && (nums[l]&nums[r])==0)
+    //                 {
+    //                     maximum = (long)nums[r]*nums[l];
+                        
+    //                 }
+    //                 System.out.println(r+" "+l);
+    //             if(l>0)
+    //                 {
+    //                     l--;
+    //                     continue;
+    //                 }
+    //             r--;
+    //     }
+
+    //     return maximum;
+    // }
+    public static void main(String[] args) {
+        int nums[] = {1,2,3,4,5,6,7};
+        long res = new Solution().maxProduct(nums);
+        System.out.println(res);
     }
 }
