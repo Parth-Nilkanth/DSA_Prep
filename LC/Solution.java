@@ -764,52 +764,80 @@
 // }
 
 // contest Q2
-class Solution {
-    // // brute force
-    public long maxProduct(int[] nums) {
-     long maximum = 0;
-     int n = nums.length;
-     for(int i = 0 ; i < n -1; i++)
-         {
-             for(int j = i+1  ;j < n ; j++)
-                 {
-                     if((long)nums[i] * nums[j] > maximum && (nums[i] & nums[j]) ==0 )
-                     {
-                         maximum = (long)nums[i] * nums[j];
-                     }
-                 }
-         }
-    return maximum;
-    }
+// class Solution {
+//     // // brute force
+//     public long maxProduct(int[] nums) {
+//      long maximum = 0;
+//      int n = nums.length;
+//      for(int i = 0 ; i < n -1; i++)
+//          {
+//              for(int j = i+1  ;j < n ; j++)
+//                  {
+//                      if((long)nums[i] * nums[j] > maximum && (nums[i] & nums[j]) ==0 )
+//                      {
+//                          maximum = (long)nums[i] * nums[j];
+//                      }
+//                  }
+//          }
+//     return maximum;
+//     }
 
-    // optimal
-    // public long maxProduct(int[] nums) {
-    //     Arrays.sort(nums);
+//     // optimal
+//     // public long maxProduct(int[] nums) {
+//     //     Arrays.sort(nums);
         
-    //     int n = nums.length;
-    //     int r = n-1 , l = n-2;
-    //     long maximum = 0;
-    //     while(r>=0)
-    //     {
-    //             if((long)nums[r]*nums[l] > maximum && (nums[l]&nums[r])==0)
-    //                 {
-    //                     maximum = (long)nums[r]*nums[l];
+//     //     int n = nums.length;
+//     //     int r = n-1 , l = n-2;
+//     //     long maximum = 0;
+//     //     while(r>=0)
+//     //     {
+//     //             if((long)nums[r]*nums[l] > maximum && (nums[l]&nums[r])==0)
+//     //                 {
+//     //                     maximum = (long)nums[r]*nums[l];
                         
-    //                 }
-    //                 System.out.println(r+" "+l);
-    //             if(l>0)
-    //                 {
-    //                     l--;
-    //                     continue;
-    //                 }
-    //             r--;
-    //     }
+//     //                 }
+//     //                 System.out.println(r+" "+l);
+//     //             if(l>0)
+//     //                 {
+//     //                     l--;
+//     //                     continue;
+//     //                 }
+//     //             r--;
+//     //     }
 
-    //     return maximum;
-    // }
-    public static void main(String[] args) {
-        int nums[] = {1,2,3,4,5,6,7};
-        long res = new Solution().maxProduct(nums);
-        System.out.println(res);
+//     //     return maximum;
+//     // }
+//     public static void main(String[] args) {
+//         int nums[] = {1,2,3,4,5,6,7};
+//         long res = new Solution().maxProduct(nums);
+//         System.out.println(res);
+//     }
+// }
+
+
+// LC 215 : Kth largest element
+import java.util.*;
+class Solution 
+{
+   public int findKthLargest(int[] nums, int k) {
+    PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+    int n = nums.length;
+    for(int i = 0 ; i < n ; i++)
+    {
+        queue.offer(nums[i]);
+    }
+    System.out.println(queue);
+    while( k > 1)
+    {
+        queue.poll();
+        k--;
+    }
+    return queue.poll();
+    }
+    public static void main(String args[])
+    {
+        int nums[] = {3,2,3,1,2,4,5,5,6};
+        int  k = 4;
+        System.out.println(new Solution().findKthLargest(nums, k));
     }
 }
