@@ -816,28 +816,48 @@
 
 
 // LC 215 : Kth largest element
-import java.util.*;
+// import java.util.*;
+// class Solution 
+// {
+//    public int findKthLargest(int[] nums, int k) {
+//     PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+//     int n = nums.length;
+//     for(int i = 0 ; i < n ; i++)
+//     {
+//         queue.offer(nums[i]);
+//     }
+//     System.out.println(queue);
+//     while( k > 1)
+//     {
+//         queue.poll();
+//         k--;
+//     }
+//     return queue.poll();
+//     }
+//     public static void main(String args[])
+//     {
+//         int nums[] = {3,2,3,1,2,4,5,5,6};
+//         int  k = 4;
+//         System.out.println(new Solution().findKthLargest(nums, k));
+//     }
+// }
+
+
+// leetcode 3025
 class Solution 
 {
-   public int findKthLargest(int[] nums, int k) {
-    PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
-    int n = nums.length;
-    for(int i = 0 ; i < n ; i++)
-    {
-        queue.offer(nums[i]);
+        public int numberOfPairs(int[][] points) {
+        int count = 0;
+        
+           return count;
     }
-    System.out.println(queue);
-    while( k > 1)
+    public static void main(String[] args)
     {
-        queue.poll();
-        k--;
-    }
-    return queue.poll();
-    }
-    public static void main(String args[])
-    {
-        int nums[] = {3,2,3,1,2,4,5,5,6};
-        int  k = 4;
-        System.out.println(new Solution().findKthLargest(nums, k));
+        int points[][] = {
+            {6,2},
+            {4,4},
+            {2,6}
+        };
+       System.out.println(new Solution().numberOfPairs(points));
     }
 }
