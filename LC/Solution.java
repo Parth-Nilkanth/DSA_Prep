@@ -843,21 +843,55 @@
 // }
 
 
-// leetcode 3025
+// // leetcode 3025
+// class Solution 
+// {
+//         public int numberOfPairs(int[][] points) {
+//         int count = 0;
+        
+//            return count;
+//     }
+//     public static void main(String[] args)
+//     {
+//         int points[][] = {
+//             {6,2},
+//             {4,4},
+//             {2,6}
+//         };
+//        System.out.println(new Solution().numberOfPairs(points));
+//     }
+// }
+
+
+// lc wwekly contest
+// class Solution {
+//     public int countBinaryPalindromes(long n) {
+//         int count = 0;
+//         for(long i = 0  ;i <= n ; i++)
+//             {
+//                 String s  = Long.toBinaryString(i);
+//                 String temp = new StringBuilder(s).reverse().toString();
+//                 System.out.println(temp+" "+s);
+//                 if(s.equals(temp) ){
+//                     System.out.println(s);
+//                             count++;
+//                 }
+                    
+//             }
+//         return count;
+//     }
+//     public static void main(String[] args)
+//     {
+//         System.out.println(new Solution().countBinaryPalindromes(4194305));
+//     }
+// }
+
 class Solution 
 {
-        public int numberOfPairs(int[][] points) {
-        int count = 0;
-        
-           return count;
-    }
-    public static void main(String[] args)
+    public static void main(String args[] )
     {
-        int points[][] = {
-            {6,2},
-            {4,4},
-            {2,6}
-        };
-       System.out.println(new Solution().numberOfPairs(points));
+        char c = 'z'+1;
+        System.out.println((int)c);
+        System.out.println(c);
     }
 }
