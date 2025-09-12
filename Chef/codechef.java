@@ -490,7 +490,42 @@
 // 	}
 // }
 
+// import java.util.*;
+// class Codechef
+// {
+// 	public static void main (String[] args) throws java.lang.Exception
+// 	{
+// 		// your code goes here
+//         Scanner sc = new Scanner(System.in);
+//         int tc = sc.nextInt();
+//         while( tc -- > 0 )
+//         {
+          
+//           int n = sc.nextInt();
+//           Map<String,Integer> map = new HashMap<>();
+//           for(int i = 0 ;  i < n * 3 ; i ++)
+//           {
+//               String s = sc.next();
+//               int c = sc.nextInt();
+//               map.put( s ,map.getOrDefault(s , 0 )+c);  
+//           }
+//           List<Integer> submissions = new ArrayList<>();
+//           for(int i : map.values())
+//              submissions.add(i);
+//          Collections.sort(submissions);
+//          for(int i : submissions)
+//             System.out.print(i+" ");
+        
+//         System.out.println();
+        
+//         }
+// 	}
+// }
+
+
+import java.lang.*;
 import java.util.*;
+
 class Codechef
 {
 	public static void main (String[] args) throws java.lang.Exception
@@ -498,26 +533,39 @@ class Codechef
 		// your code goes here
         Scanner sc = new Scanner(System.in);
         int tc = sc.nextInt();
-        while( tc -- > 0 )
+        while(tc-- > 0)
         {
-          
-          int n = sc.nextInt();
-          Map<String,Integer> map = new HashMap<>();
-          for(int i = 0 ;  i < n * 3 ; i ++)
-          {
-              String s = sc.next();
-              int c = sc.nextInt();
-              map.put( s ,map.getOrDefault(s , 0 )+c);  
-          }
-          List<Integer> submissions = new ArrayList<>();
-          for(int i : map.values())
-             submissions.add(i);
-         Collections.sort(submissions);
-         for(int i : submissions)
-            System.out.print(i+" ");
-        
-        System.out.println();
-        
+            int n = sc.nextInt();
+            int required_weight = sc.nextInt();
+            int rod = sc.nextInt();
+            int weights[] = new int[n];
+            for(int i = 0 ; i < n ; i++)
+                weights[i] = sc.nextInt();
+            if(rod >= required_weight){
+                System.out.println("YES");
+                continue;   
+            }
+            HashMap<Integer,Integer> map  = new HashMap<>();
+            for(int x : weights)
+                map.put(x , map.getOrDefault(x , 0 ) + 1);
+            long remaining_weight = required_weight - rod;
+            boolean flag = false;
+            for(int x : map.keySet())
+            {
+                if(map.get(x)%2==0)
+                {
+                    remaining_weight-= x* map.get(x);
+                }
+                if(remaining_weight <=0)
+                    {
+                        flag = true;
+                        break;
+                    }
+            }
+            if(flag)
+                System.out.println("YES");
+            else
+                System.out.println("NO");
         }
 	}
 }
