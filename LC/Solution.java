@@ -886,12 +886,261 @@
 //     }
 // }
 
+// class Solution 
+// {
+//     public static void main(String args[] )
+//     {
+//         char c = 'z'+1;
+//         System.out.println((int)c);
+//         System.out.println(c);
+//     }
+// }
+
+// //lc sort matricx by kth col 
+// import java.util.*;
+// class Solution {
+//     public int[][] sortTheStudents(int score[][], int k) {
+//      int rows  = score.length;
+//      int cols = score[0].length;
+//      int res[][] = new int[rows][cols];
+//      PriorityQueue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
+//      HashMap<Integer , Integer> map = new HashMap<>();
+//      for(int i = 0 ; i < rows ; i++){
+//         map.put(score[i][k] , i);
+//         q.add(score[i][k]);
+//      }
+     
+//      for(int x : map.keySet())
+        
+//      System.out.println(q);
+//      for(int i = 0 ; i < rows ; i++)
+//      {
+//         int ro = map.get(q.poll());
+//         for(int j = 0 ; j < cols ; j++)
+//         {
+//             res[i][j] = score[ro][j];
+//         }
+//      }
+//     return res;        
+//     }
+//     public static void main(String[] args) {
+//         int arr[][]={
+//             {10,6,9,1},
+//             {7,5,11,2},
+//             {4,8,3,15}
+//         };
+//         for(int i = 0 ; i < arr.length; i++)
+//         {
+//             for(int j = 0 ; j < arr[0].length ; j++)
+//             {
+//                 System.out.print(arr[i][j]+" ");
+//             }
+//             System.out.println();
+//         }
+//         int k =2;
+//         int res[][] =new Solution().sortTheStudents(arr, k);
+//         for(int i = 0 ; i < res.length; i++)
+//         {
+//             for(int j = 0 ; j < res[0].length ; j++)
+//             {
+//                 System.out.print(res[i][j]+" ");
+//             }
+//             System.out.println();
+//         }
+//     }
+// }
+
+// import java.util.Collections;
+// import java.util.PriorityQueue;
+
+// class Solution {
+//     public int[][] sortMatrix(int[][] grid) {
+//         int n = grid.length;
+//         PriorityQueue<Integer> q = new PriorityQueue<>();
+//         int r = 0 , c = n-2;
+//         while(c > 0){
+//         int tempc = c ,  tempr = r;
+//         while(  r < n && c < n)
+//         {
+//             q.add(grid[r][c]);
+//             r++;
+//             c++;
+//         }
+//         System.out.println(q);
+//          c = tempc ;
+//          r = tempr;
+//         while( c < n && r < n)
+//         {
+//             grid[r][c] = q.poll();
+//             r++;
+//             c++;
+//         }
+//         c = tempc ;
+//          r= tempr;
+//         c--;
+//         }
+//         q = new PriorityQueue<>(Collections.reverseOrder());
+//         r = 0 ; c = 0;
+//         while( r < n-1)
+//         {
+//         int tempc = c ,  tempr = r;
+//         while( c < n && r < n)
+//         {
+//             q.add(grid[r][c]);
+//             r++;
+//             c++;
+//         }
+//         c = tempc ;
+//          r = tempr;
+//         while( c < n && r < n)
+//         {
+//             grid[r][c] = q.poll();
+//             r++;
+//             c++;
+//         }
+//          c = tempc ;
+//          r= tempr;
+//         r--;
+//         }
+//         return grid;
+//     }
+//     public static void main(String args[])
+//     {
+//         int arr[][]={{1,7,3},{9,8,2},{4,5,6}};
+//         int res[][] = new Solution().sortMatrix(arr);
+
+//     }
+// // }
+// import java.util.*;
+// class Solution 
+// {
+//         public int smallestAbsent(int[] nums) {
+//         int n = nums.length;
+//         HashSet<Integer> set = new HashSet<>();
+//         double avg = 0;
+//         for(int x : nums){
+//                 set.add(x);
+//                 avg+=x;
+//         }
+//         avg = avg/n;
+//         int ans = 0;
+//         for(int i = 1; i <= 100000000000000000 ; i++)
+//             {
+//                 if(!set.contains(i) && i > avg)
+//                 {
+//                     ans = i;
+//                     break;
+//                 }    
+//             }
+//         return ans;
+//     }
+//     public static void main(String[] args) {
+//         int nums[]  ={98,100};
+//         System.out.println(new Solution().smallestAbsent(nums));
+//     }
+// }
+
+// class MaximumXORTwoSubsequences {
+
+//     static final int INT_BITS = 32;
+
+//     // Function to find maximum XOR of any subset of given array
+//     public static int maxSubsetXOR(int[] set) {
+//         int index = 0;
+
+//         // Process bits from most significant to least significant
+//         for (int i = INT_BITS - 1; i >= 0; i--) {
+//             // Find element with max value with i-th bit set
+//             int maxInd = index;
+//             int maxEle = Integer.MIN_VALUE;
+//             for (int j = index; j < set.length; j++) {
+//                 if (((set[j] & (1 << i)) != 0) && set[j] > maxEle) {
+//                     maxEle = set[j];
+//                     maxInd = j;
+//                 }
+//             }
+
+//             // If no element with i-th bit set, continue to next bit
+//             if (maxEle == Integer.MIN_VALUE)
+//                 continue;
+
+//             // Swap to front
+//             int temp = set[index];
+//             set[index] = set[maxInd];
+//             set[maxInd] = temp;
+
+//             maxInd = index;
+
+//             // XOR this element with others having i-th bit set
+//             for (int j = 0; j < set.length; j++) {
+//                 if (j != maxInd && ((set[j] & (1 << i)) != 0)) {
+//                     set[j] ^= set[maxInd];
+//                 }
+//             }
+//             index++;
+//         }
+
+//         // Compute XOR of reduced array to get maximum subset XOR
+//         int result = 0;
+//         for (int num : set) {
+//             result ^= num;
+//         }
+//         return result;
+//     }
+//     public static void main(String[] args)
+//     {
+//          int[] arr = {5,2};  // Example input
+//         int maxXOR = maxSubsetXOR(arr);
+//         System.out.println("Maximum XOR of two subsequences (empty allowed): " + maxXOR);
+//     }
+// }
+
+import java.util.HashMap;
+import java.util.Map;
+
 class Solution 
 {
-    public static void main(String args[] )
+    public int minArrivalsToDiscard(int[] arrivals, int w, int m) {
+          int n = arrivals.length;
+        if (w > n) return 0;
+
+        Map<Integer, Integer> freq = new HashMap<>();
+        int over = 0; // total extras to discard in the current window
+
+        // Build first window
+        for (int i = 0; i < w; i++) {
+            int val = arrivals[i];
+            int f = freq.getOrDefault(val, 0) + 1;
+            freq.put(val, f);
+            if (f > m) over++;           // we added one more extra
+        }
+        int ans = over;
+
+        // Slide the window
+        for (int i = w; i < n; i++) {
+            // remove left element
+            int left = arrivals[i - w];
+            int fLeft = freq.get(left);
+            if (fLeft > m) over--;       // one extra is leaving
+            if (fLeft == 1) freq.remove(left);
+            else freq.put(left, fLeft - 1);
+
+            // add right element
+            int right = arrivals[i];
+            int fRight = freq.getOrDefault(right, 0) + 1;
+            freq.put(right, fRight);
+            if (fRight > m) over++;      // one extra entered
+
+            ans = Math.min(ans, over);
+        }
+
+        return ans;
+    }
+    public static void main(String[] args)
     {
-        char c = 'z'+1;
-        System.out.println((int)c);
-        System.out.println(c);
+        int arrivals[]  ={10,4,3,6,4,5,6,1,4};
+        int w = 7 , m = 1;
+        System.out.println(new Solution().minArrivalsToDiscard(arrivals, w, m));
+
     }
 }
