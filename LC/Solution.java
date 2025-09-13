@@ -1095,52 +1095,113 @@
 //     }
 // }
 
-import java.util.HashMap;
-import java.util.Map;
+// import java.util.HashMap;
+// import java.util.Map;
 
-class Solution 
-{
-    public int minArrivalsToDiscard(int[] arrivals, int w, int m) {
-          int n = arrivals.length;
-        if (w > n) return 0;
+// class Solution 
+// {
+//     public int minArrivalsToDiscard(int[] arrivals, int w, int m) {
+//           int n = arrivals.length;
+//         if (w > n) return 0;
 
-        Map<Integer, Integer> freq = new HashMap<>();
-        int over = 0; // total extras to discard in the current window
+//         Map<Integer, Integer> freq = new HashMap<>();
+//         int over = 0; // total extras to discard in the current window
 
-        // Build first window
-        for (int i = 0; i < w; i++) {
-            int val = arrivals[i];
-            int f = freq.getOrDefault(val, 0) + 1;
-            freq.put(val, f);
-            if (f > m) over++;           // we added one more extra
-        }
-        int ans = over;
+//         // Build first window
+//         for (int i = 0; i < w; i++) {
+//             int val = arrivals[i];
+//             int f = freq.getOrDefault(val, 0) + 1;
+//             freq.put(val, f);
+//             if (f > m) over++;           // we added one more extra
+//         }
+//         int ans = over;
 
-        // Slide the window
-        for (int i = w; i < n; i++) {
-            // remove left element
-            int left = arrivals[i - w];
-            int fLeft = freq.get(left);
-            if (fLeft > m) over--;       // one extra is leaving
-            if (fLeft == 1) freq.remove(left);
-            else freq.put(left, fLeft - 1);
+//         // Slide the window
+//         for (int i = w; i < n; i++) {
+//             // remove left element
+//             int left = arrivals[i - w];
+//             int fLeft = freq.get(left);
+//             if (fLeft > m) over--;       // one extra is leaving
+//             if (fLeft == 1) freq.remove(left);
+//             else freq.put(left, fLeft - 1);
 
-            // add right element
-            int right = arrivals[i];
-            int fRight = freq.getOrDefault(right, 0) + 1;
-            freq.put(right, fRight);
-            if (fRight > m) over++;      // one extra entered
+//             // add right element
+//             int right = arrivals[i];
+//             int fRight = freq.getOrDefault(right, 0) + 1;
+//             freq.put(right, fRight);
+//             if (fRight > m) over++;      // one extra entered
 
-            ans = Math.min(ans, over);
-        }
+//             ans = Math.min(ans, over);
+//         }
 
-        return ans;
-    }
-    public static void main(String[] args)
-    {
-        int arrivals[]  ={10,4,3,6,4,5,6,1,4};
-        int w = 7 , m = 1;
-        System.out.println(new Solution().minArrivalsToDiscard(arrivals, w, m));
+//         return ans;
+//     }
+//     public static void main(String[] args)
+//     {
+//         int arrivals[]  ={10,4,3,6,4,5,6,1,4};
+//         int w = 7 , m = 1;
+//         System.out.println(new Solution().minArrivalsToDiscard(arrivals, w, m));
 
-    }
-}
+//     }
+// }
+
+
+
+// // wrrong solution for sorting matrix by diagonal
+// class Solution {
+//     public int[][] sortMatrix(int[][] grid) {
+//         int n = grid.length;
+//         PriorityQueue<Integer> q = new PriorityQueue<>();
+//         int r = n-2 , c = n-2;
+//         while(c > 0){
+//         int tempc = c ,  tempr = r;
+//         while( c < n && r < n)
+//         {
+//             q.add(grid[r][c]);
+//             r++;
+//             c++;
+//         }
+//          c = tempc ;
+//          r = tempr;
+//         while( c < n && r < n)
+//         {
+//             grid[r][c] = q.poll();
+//             r++;
+//             c++;
+//         }
+//         c = tempc ;
+//          r= tempr;
+//         c--;
+//         }
+//         for(int i = 0 ; i < n ; i++)
+//         {
+//             for(int j =0 ;j < n ; j++)
+//                 System.out.print(grid[i][j]+" ");
+//             System.out.println();
+//         }
+//         q = new PriorityQueue<>(Collections.reverseOrder());
+//         r = 0 ; c = 0;
+//         while( r < n-1)
+//         {
+//         int tempc = c ,  tempr = r;
+//         while( c < n && r < n)
+//         {
+//             q.add(grid[r][c]);
+//             r++;
+//             c++;
+//         }
+//         c = tempc ;
+//          r = tempr;
+//         while( c < n && r < n)
+//         {
+//             grid[r][c] = q.poll();
+//             r++;
+//             c++;
+//         }
+//          c = tempc ;
+//          r= tempr;
+//         r--;
+//         }
+//         return grid;
+//     }
+// }
