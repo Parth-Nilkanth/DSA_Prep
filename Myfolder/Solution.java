@@ -870,192 +870,221 @@
 // }
 
 
-import java.util.*;
-import java.io.*;
+// import java.util.*;
+// import java.io.*;
 
-public class Solution {
+// public class Solution {
     
-    // Check if characters can form a palindrome
-    public static boolean canFormPalindrome(String s) {
-        Map<Character, Integer> charCount = new HashMap<>();
+//     // Check if characters can form a palindrome
+//     public static boolean canFormPalindrome(String s) {
+//         Map<Character, Integer> charCount = new HashMap<>();
         
-        for (char c : s.toCharArray()) {
-            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
-        }
+//         for (char c : s.toCharArray()) {
+//             charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+//         }
         
-        int oddCount = 0;
-        for (int count : charCount.values()) {
-            if (count % 2 == 1) {
-                oddCount++;
-            }
-        }
+//         int oddCount = 0;
+//         for (int count : charCount.values()) {
+//             if (count % 2 == 1) {
+//                 oddCount++;
+//             }
+//         }
         
-        return oddCount <= 1;
-    }
+//         return oddCount <= 1;
+//     }
     
-    // Form the shortest palindrome from given characters
-    public static String formShortestPalindrome(String s) {
-        if (s.isEmpty()) {
-            return "";
-        }
+//     // Form the shortest palindrome from given characters
+//     public static String formShortestPalindrome(String s) {
+//         if (s.isEmpty()) {
+//             return "";
+//         }
         
-        Map<Character, Integer> charCount = new HashMap<>();
-        for (char c : s.toCharArray()) {
-            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
-        }
+//         Map<Character, Integer> charCount = new HashMap<>();
+//         for (char c : s.toCharArray()) {
+//             charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+//         }
         
-        // Build palindrome
-        StringBuilder leftHalf = new StringBuilder();
-        char middle = '\0';
+//         // Build palindrome
+//         StringBuilder leftHalf = new StringBuilder();
+//         char middle = '\0';
         
-        // Sort characters for consistent ordering
-        List<Character> sortedChars = new ArrayList<>(charCount.keySet());
-        Collections.sort(sortedChars);
+//         // Sort characters for consistent ordering
+//         List<Character> sortedChars = new ArrayList<>(charCount.keySet());
+//         Collections.sort(sortedChars);
         
-        for (char c : sortedChars) {
-            int count = charCount.get(c);
-            // Add half of the characters to left side
-            for (int i = 0; i < count / 2; i++) {
-                leftHalf.append(c);
-            }
-            // If odd count, use this character as middle
-            if (count % 2 == 1) {
-                middle = c;
-            }
-        }
+//         for (char c : sortedChars) {
+//             int count = charCount.get(c);
+//             // Add half of the characters to left side
+//             for (int i = 0; i < count / 2; i++) {
+//                 leftHalf.append(c);
+//             }
+//             // If odd count, use this character as middle
+//             if (count % 2 == 1) {
+//                 middle = c;
+//             }
+//         }
         
-        // Build the palindrome
-        StringBuilder palindrome = new StringBuilder();
-        palindrome.append(leftHalf);
-        if (middle != '\0') {
-            palindrome.append(middle);
-        }
-        palindrome.append(leftHalf.reverse());
+//         // Build the palindrome
+//         StringBuilder palindrome = new StringBuilder();
+//         palindrome.append(leftHalf);
+//         if (middle != '\0') {
+//             palindrome.append(middle);
+//         }
+//         palindrome.append(leftHalf.reverse());
         
-        return palindrome.toString();
-    }
+//         return palindrome.toString();
+//     }
     
-    // Solve the palindromic path problem
-    public static int solvePalindromicPath(int m, int n, List<Edge> edges) {
-        // Build adjacency list
-        Map<Integer, List<Edge>> graph = new HashMap<>();
-        for (int i = 1; i <= n; i++) {
-            graph.put(i, new ArrayList<>());
-        }
+//     // Solve the palindromic path problem
+//     public static int solvePalindromicPath(int m, int n, List<Edge> edges) {
+//         // Build adjacency list
+//         Map<Integer, List<Edge>> graph = new HashMap<>();
+//         for (int i = 1; i <= n; i++) {
+//             graph.put(i, new ArrayList<>());
+//         }
         
-        for (Edge edge : edges) {
-            graph.get(edge.from).add(edge);
-            // Uncomment for undirected graph:
-            // graph.get(edge.to).add(new Edge(edge.to, edge.from, edge.character));
-        }
+//         for (Edge edge : edges) {
+//             graph.get(edge.from).add(edge);
+//             // Uncomment for undirected graph:
+//             // graph.get(edge.to).add(new Edge(edge.to, edge.from, edge.character));
+//         }
         
-        // BFS to find all possible paths from 1 to N
-        Queue<State> queue = new LinkedList<>();
-        Set<String> visitedStates = new HashSet<>();
-        int minPalindromeLength = Integer.MAX_VALUE;
+//         // BFS to find all possible paths from 1 to N
+//         Queue<State> queue = new LinkedList<>();
+//         Set<String> visitedStates = new HashSet<>();
+//         int minPalindromeLength = Integer.MAX_VALUE;
         
-        queue.offer(new State(1, ""));
+//         queue.offer(new State(1, ""));
         
-        while (!queue.isEmpty()) {
-            State current = queue.poll();
+//         while (!queue.isEmpty()) {
+//             State current = queue.poll();
             
-            // If we reached the destination
-            if (current.vertex == n) {
-                if (canFormPalindrome(current.pathString)) {
-                    String palindrome = formShortestPalindrome(current.pathString);
-                    minPalindromeLength = Math.min(minPalindromeLength, palindrome.length());
-                }
-                continue;
-            }
+//             // If we reached the destination
+//             if (current.vertex == n) {
+//                 if (canFormPalindrome(current.pathString)) {
+//                     String palindrome = formShortestPalindrome(current.pathString);
+//                     minPalindromeLength = Math.min(minPalindromeLength, palindrome.length());
+//                 }
+//                 continue;
+//             }
             
-            // State to avoid revisiting same vertex with same character set
-            char[] chars = current.pathString.toCharArray();
-            Arrays.sort(chars);
-            String stateKey = current.vertex + ":" + new String(chars);
+//             // State to avoid revisiting same vertex with same character set
+//             char[] chars = current.pathString.toCharArray();
+//             Arrays.sort(chars);
+//             String stateKey = current.vertex + ":" + new String(chars);
             
-            if (visitedStates.contains(stateKey)) {
-                continue;
-            }
-            visitedStates.add(stateKey);
+//             if (visitedStates.contains(stateKey)) {
+//                 continue;
+//             }
+//             visitedStates.add(stateKey);
             
-            // Explore neighbors
-            for (Edge edge : graph.get(current.vertex)) {
-                String newPath = current.pathString + edge.character;
-                queue.offer(new State(edge.to, newPath));
-            }
-        }
+//             // Explore neighbors
+//             for (Edge edge : graph.get(current.vertex)) {
+//                 String newPath = current.pathString + edge.character;
+//                 queue.offer(new State(edge.to, newPath));
+//             }
+//         }
         
-        return minPalindromeLength == Integer.MAX_VALUE ? -1 : minPalindromeLength;
-    }
+//         return minPalindromeLength == Integer.MAX_VALUE ? -1 : minPalindromeLength;
+//     }
     
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+//     public static void main(String[] args) {
+//         Scanner scanner = new Scanner(System.in);
         
-        // Read input
-        int m = scanner.nextInt();
-        int n = scanner.nextInt();
+//         // Read input
+//         int m = scanner.nextInt();
+//         int n = scanner.nextInt();
         
-        List<Edge> edges = new ArrayList<>();
+//         List<Edge> edges = new ArrayList<>();
         
-        for (int i = 0; i < m; i++) {
-            int v1 = scanner.nextInt();
-            int v2 = scanner.nextInt();
-            char c = scanner.next().charAt(0);
-            edges.add(new Edge(v1, v2, c));
-        }
+//         for (int i = 0; i < m; i++) {
+//             int v1 = scanner.nextInt();
+//             int v2 = scanner.nextInt();
+//             char c = scanner.next().charAt(0);
+//             edges.add(new Edge(v1, v2, c));
+//         }
         
-        // Solve and print result
-        int result = solvePalindromicPath(m, n, edges);
-        System.out.println(result);
+//         // Solve and print result
+//         int result = solvePalindromicPath(m, n, edges);
+//         System.out.println(result);
         
-        scanner.close();
-    }
+//         scanner.close();
+//     }
     
-    // Test function with sample input
-    public static void testWithSample() {
-        System.out.println("Testing with sample input:");
+//     // Test function with sample input
+//     public static void testWithSample() {
+//         System.out.println("Testing with sample input:");
         
-        // Sample input:
-        // 3 3
-        // 1 2 a
-        // 2 3 b
-        // 1 3 a
+//         // Sample input:
+//         // 3 3
+//         // 1 2 a
+//         // 2 3 b
+//         // 1 3 a
         
-        int m = 3, n = 3;
-        List<Edge> edges = new ArrayList<>();
-        edges.add(new Edge(1, 2, 'a'));
-        edges.add(new Edge(2, 3, 'b'));
-        edges.add(new Edge(1, 3, 'a'));
+//         int m = 3, n = 3;
+//         List<Edge> edges = new ArrayList<>();
+//         edges.add(new Edge(1, 2, 'a'));
+//         edges.add(new Edge(2, 3, 'b'));
+//         edges.add(new Edge(1, 3, 'a'));
         
-        int result = solvePalindromicPath(m, n, edges);
-        System.out.println("Sample result: " + result);
+//         int result = solvePalindromicPath(m, n, edges);
+//         System.out.println("Sample result: " + result);
         
-        // Show possible paths:
-        // Path 1->2->3: "ab" -> can form palindrome by rearranging? No, need equal chars
-        // Path 1->3: "a" -> already palindrome, length 1
+//         // Show possible paths:
+//         // Path 1->2->3: "ab" -> can form palindrome by rearranging? No, need equal chars
+//         // Path 1->3: "a" -> already palindrome, length 1
         
-        System.out.println("Expected: 1 (path 1->3 gives 'a' which is palindrome of length 1)");
-    }
+//         System.out.println("Expected: 1 (path 1->3 gives 'a' which is palindrome of length 1)");
+//     }
     
-    // Helper classes
-    static class Edge {
-        int from, to;
-        char character;
+//     // Helper classes
+//     static class Edge {
+//         int from, to;
+//         char character;
         
-        public Edge(int from, int to, char character) {
-            this.from = from;
-            this.to = to;
-            this.character = character;
-        }
-    }
+//         public Edge(int from, int to, char character) {
+//             this.from = from;
+//             this.to = to;
+//             this.character = character;
+//         }
+//     }
     
-    static class State {
-        int vertex;
-        String pathString;
+//     static class State {
+//         int vertex;
+//         String pathString;
         
-        public State(int vertex, String pathString) {
-            this.vertex = vertex;
-            this.pathString = pathString;
-        }
+//         public State(int vertex, String pathString) {
+//             this.vertex = vertex;
+//             this.pathString = pathString;
+//         }
+//     }
+// }
+
+class Parent
+{
+    void display()
+    {
+        System.out.println("Parent");
+    }
+}
+class Child extends Parent
+{
+    void display()
+    {
+        System.out.println("Child");
+    }
+    void play()
+    {
+        System.out.println("play");
+    }
+}
+
+class Solution 
+{
+    public static void main(String argsp[])
+    {
+        Parent p =(Parent) new Child();
+        p.display();
+    
     }
 }

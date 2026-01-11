@@ -45,10 +45,29 @@
 // 	}
 // }
 
-class Solution 
+import java.util.*;
+public class Solution 
 {
-	public static void main(String args[])
-	{
-		System.out.println(Math.log(4));
-	}
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        while( tc -- > 0)
+        {
+            int n = sc.nextInt();
+            TreeMap<String,Integer> map = new TreeMap<>();
+            for(int i = 0 ;i < 3 * n ; i ++)
+            {
+                String s = sc.next();
+                int freq = sc.nextInt();
+                map.put( s , map.getOrDefault(s ,0)+freq);
+            }
+            List<Integer> ls = new ArrayList<>(map.values());
+            Collections.sort(ls);
+            for(int x : ls)
+            	System.out.print(x+" ");
+           	System.out.println();
+        }       
+        sc.close();
+    }
 }

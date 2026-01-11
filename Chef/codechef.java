@@ -523,9 +523,161 @@
 // }
 
 
-import java.lang.*;
-import java.util.*;
+// import java.lang.*;
+// import java.util.*;
 
+// class Codechef
+// {
+// 	public static void main (String[] args) throws java.lang.Exception
+// 	{
+// 		// your code goes here
+//         Scanner sc = new Scanner(System.in);
+//         int tc = sc.nextInt();
+//         while(tc-- > 0)
+//         {
+//             int n = sc.nextInt();
+//             int required_weight = sc.nextInt();
+//             int rod = sc.nextInt();
+//             int weights[] = new int[n];
+//             for(int i = 0 ; i < n ; i++)
+//                 weights[i] = sc.nextInt();
+//             if(rod >= required_weight){
+//                 System.out.println("YES");
+//                 continue;   
+//             }
+//             HashMap<Integer,Integer> map  = new HashMap<>();
+//             for(int x : weights)
+//                 map.put(x , map.getOrDefault(x , 0 ) + 1);
+//             long remaining_weight = required_weight - rod;
+//             boolean flag = false;
+//             for(int x : map.keySet())
+//             {
+//                 if(map.get(x)%2==0)
+//                 {
+//                     remaining_weight-= x* map.get(x);
+//                 }
+//                 if(remaining_weight <=0)
+//                     {
+//                         flag = true;
+//                         break;
+//                     }
+//             }
+//             if(flag)
+//                 System.out.println("YES");
+//             else
+//                 System.out.println("NO");
+//         }
+// 	}
+// }
+
+
+// import java.util.*;
+// class codechef 
+// {
+// 	public static void main (String[] args) throws java.lang.Exception
+// 	{
+// 		// your code goes here
+// 		Scanner sc = new Scanner(System.in);
+//         char a = sc.next().charAt(0);
+//         char b = sc.next().charAt(0);
+//         System.out.println(a+b);
+		
+
+//     }
+// }
+// import java.lang.*;
+// import java.util.*;
+
+// class Codechef
+// {
+// 	public static void main (String[] args) throws java.lang.Exception
+// 	{
+// 		// your code goes here
+//         Scanner sc = new Scanner(System.in);
+//         int tc = sc.nextInt();
+//         while(tc -- > 0 )
+//         {
+//             int n = sc.nextInt();
+//             int k = sc.nextInt();
+//             if(n==1)
+//                 {
+//                     System.out.println(0);
+//                     continue;
+//                 }
+//             long res = 2*n*k - (2 * k * (k + 1) - k);
+//                 System.out.println(res);
+//             }
+        
+// 	}
+// }
+
+
+// import java.util.*;
+// import java.lang.*;
+// import java.io.*;
+
+// class Codechef
+// {
+// 	public static void main (String[] args) throws java.lang.Exception
+// 	{
+// 		// your code goes here
+//         Scanner sc = new Scanner(System.in);
+//         int tc = sc.nextInt();
+//         byValue cmp = new byValue();
+//         while( tc --   > 0)
+//         {
+//             int n = sc.nextInt();
+//             int k = sc.nextInt();
+//             int a[] = new int[n];
+//             int b[] = new int[n];
+//             for(int i = 0 ; i < n ; i++)
+//                 a[i] = sc.nextInt();
+//             for(int i = 0 ; i < n ; i++)
+//                 b[i] = sc.nextInt();
+            	
+//             // base case if there are not at most k distint dishes
+//             // construct hashmap
+//             Map<Integer,Integer> map = new TreeMap<Integer,Integer>(cmp);
+//             for(int i = 0 ; i  < n ; i++)
+//             {
+//                 if(!map.containsKey(a[i]))
+//                     map.put(a[i] ,  b[i]);
+//                 else    
+//                     map.put(a[i] , Math.min(map.get(a[i] ) , b[i]));
+//             }
+//             if(map.size() < k)
+//                 System.out.println(-1);
+//             else{
+//                 int sum = 0;
+//                 int count = 0;
+//                 for(Map.Entry<Integer,Integer> entry : map.entrySet())
+//                 {
+//                     if(count == k)
+//                         break;
+//                     sum+=entry.getValue();       
+//                     count++;
+//                 }
+//                 System.out.println(sum);
+//             }        
+//         }
+// 	}
+// }
+
+// class byValue implements Comparator<Map.Entry<Integer,Integer>> {
+//     public int compare(Map.Entry<Integer,Integer> e1, Map.Entry<Integer,Integer> e2) {
+//         if (e1.getValue() < e2.getValue()){
+//             return 1;
+//         } else if (e1.getValue() == e2.getValue()) {
+//             return 0;
+//         } else {
+//             return -1;
+//         }
+//     }
+// }
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 class Codechef
 {
 	public static void main (String[] args) throws java.lang.Exception
@@ -533,39 +685,17 @@ class Codechef
 		// your code goes here
         Scanner sc = new Scanner(System.in);
         int tc = sc.nextInt();
-        while(tc-- > 0)
+        while(tc -- > 0 )
         {
             int n = sc.nextInt();
-            int required_weight = sc.nextInt();
-            int rod = sc.nextInt();
-            int weights[] = new int[n];
-            for(int i = 0 ; i < n ; i++)
-                weights[i] = sc.nextInt();
-            if(rod >= required_weight){
-                System.out.println("YES");
-                continue;   
-            }
-            HashMap<Integer,Integer> map  = new HashMap<>();
-            for(int x : weights)
-                map.put(x , map.getOrDefault(x , 0 ) + 1);
-            long remaining_weight = required_weight - rod;
-            boolean flag = false;
-            for(int x : map.keySet())
+            int x = sc.nextInt();
+            int arr[] = new int[n];
+            // array input
+            for(int i = 0 ; i < n ; i ++)
             {
-                if(map.get(x)%2==0)
-                {
-                    remaining_weight-= x* map.get(x);
-                }
-                if(remaining_weight <=0)
-                    {
-                        flag = true;
-                        break;
-                    }
+                    arr[i] = sc.nextInt();
             }
-            if(flag)
-                System.out.println("YES");
-            else
-                System.out.println("NO");
+           
         }
 	}
 }
