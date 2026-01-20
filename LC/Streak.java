@@ -1206,10 +1206,80 @@
 // }
 
 
-class Solution 
+// leetcode problem statement separateSquares
+class Solution
 {
-	public static void main(String args[])
+	double separateSquares(int squares[][])
 	{
-		System.out.println("Hello MOMAS");
+		double totalArea = getTotalArea(squares);
+		double target = totalArea / 2.0;
+
+		double low = getMinY(squares);
+		double high = getMaxY(squares);
+
+		for(int i = 0 ; i < 60 ; i++)
+		{
+			double mid = low + (high-low)/2.0;
+			if(areaBelow(mid,squares)<target)
+					low = mid;
+				else
+					high = mid;
+		}
+		return high;
 	}
+	
+	double getTotalArea(int squares[][])
+	{
+		double area = 0;
+		for(int square[] : squares)
+		{
+			double length = square[2];
+			area += length*length;
+		}
+		return area;
+	}
+	 private double getMinY(int[][] squares) {
+        double minY = Double.MAX_VALUE;
+        for (int[] sq : squares) {
+            minY = Math.min(minY, sq[1]);
+        }
+        return minY;
+    }
+
+    // Maximum possible y-value
+    private double getMaxY(int[][] squares) {
+        double maxY = Double.MIN_VALUE;
+        for (int[] sq : squares) {
+            maxY = Math.max(maxY, sq[1] + sq[2]);
+        }
+        return maxY;
+    }
+        private double areaBelow(double H, int[][] squares) {
+        double area = 0;
+
+        for (int[] sq : squares) {
+            double y = sq[1];
+            double l = sq[2];
+
+            if (H <= y) {
+                // line is below square
+                continue;
+            } else if (H >= y + l) {
+                // square fully below
+                area += l * l;
+            } else {
+                // line cuts the square
+                area += l * (H - y);
+            }
+        }
+
+        return area;
+    }
+    public static void main(String args[])
+    {
+    	int squares[][] = {
+    		{0,0,1},{2,2,1}
+    	};
+    	System.out.println(new Solution().separateSquares(squares));
+    }
 }

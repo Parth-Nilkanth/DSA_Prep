@@ -1437,3 +1437,68 @@
 
 
 // 
+// class Solution {
+//     public int tribonacci(int n) {
+//         int t0 = 0 , t1 = 1 , t2 = 1;
+//         if(n==0)
+//             return 0;
+//         if(n<=2)
+//             return 1;
+//         return trib(n);
+//     }
+//     int trib(int n)
+//     {
+//         if(n==0)
+//             return 0;
+//         if(n<=2)
+//             return 1;
+
+//         return +trib(n-1)+trib(n-2);
+//     }
+//     public static void main(String a[])
+//     {
+//     	System.out.println(new Solution().tribonacci(4));
+//     }
+// }
+
+
+class Solution {
+    public int maximumPrimeDifference(int[] nums) {
+        int idx1 = -1;
+        int idx2 = -1;
+        for(int i = 0 ; i < nums.length ; i++)
+        {
+            if(isPrime(nums[i]))
+            {
+                if(idx1==-1)
+                {
+                    idx1=i;
+                    continue;
+                }
+                idx2=i;
+            }
+        }
+        if(idx2==-1)
+            return 0;
+        return idx2 - idx1;
+    }
+    boolean isPrime(int n)
+    {
+        if(n<=1)
+            return false;
+        if(n==2)
+            return true;
+        for(int i = 2 ; i <= (n / 2 ) ; i++)
+        {
+            if(n%i==0)
+                return false;
+        }
+        return true;
+    }
+
+	public static void main(String args[])
+	{
+		int nums[] = {1,2,4,5,6,9,11};
+		System.out.println(new Solution().maximumPrimeDifference(nums));
+	}
+}

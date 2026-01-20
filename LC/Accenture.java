@@ -34,64 +34,80 @@
 // }
 
 
-import java.util.*;
- class Main {
-   public static void primeMatrix(int n, int[][] matrix) {
-    List<int[]> primes = new ArrayList<>();
+// import java.util.*;
+//  class Main {
+//    public static void primeMatrix(int n, int[][] matrix) {
+//     List<int[]> primes = new ArrayList<>();
     
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            if(isPrime(matrix[i][j])) {
-                primes.add(new int[]{i, j});
-            }
-        }
-    }
+//     for(int i = 0; i < n; i++) {
+//         for(int j = 0; j < n; j++) {
+//             if(isPrime(matrix[i][j])) {
+//                 primes.add(new int[]{i, j});
+//             }
+//         }
+//     }
     
-    for(int[] pos : primes) {
-        modify(matrix, pos[0], pos[1]);
-    }
-}
+//     for(int[] pos : primes) {
+//         modify(matrix, pos[0], pos[1]);
+//     }
+// }
 
-    static void modify(int matrix[][] , int r , int c)
-    {
-        int n = matrix.length;
-        for(int i = 0 ; i < n ; i ++)
-            matrix[i][c] = -1;
-        for(int i = 0 ; i < n ; i ++)
-            matrix[r][i] = -1;
+//     static void modify(int matrix[][] , int r , int c)
+//     {
+//         int n = matrix.length;
+//         for(int i = 0 ; i < n ; i ++)
+//             matrix[i][c] = -1;
+//         for(int i = 0 ; i < n ; i ++)
+//             matrix[r][i] = -1;
         
-    }
-    static boolean isPrime(int n)
-    {
-        if(n==1)    
-            return false;
-        if(n<=3)
-            return true;
-        for(int i = 2 ; i <= n/2 ; i ++ )
-        {
-            if(n%i==0)
-                return false;
-        }
-        return true;
-    }
+//     }
+//     static boolean isPrime(int n)
+//     {
+//         if(n==1)    
+//             return false;
+//         if(n<=3)
+//             return true;
+//         for(int i = 2 ; i <= n/2 ; i ++ )
+//         {
+//             if(n%i==0)
+//                 return false;
+//         }
+//         return true;
+//     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int[][] matrix = new int[n][n];
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
+//     public static void main(String[] args) {
+//         Scanner scanner = new Scanner(System.in);
+//         int n = scanner.nextInt();
+//         int[][] matrix = new int[n][n];
+//         for (int i = 0; i < n; ++i) {
+//             for (int j = 0; j < n; ++j) {
+//                 matrix[i][j] = scanner.nextInt();
+//             }
+//         }
         
-        primeMatrix(n, matrix);
+//         primeMatrix(n, matrix);
         
-        for (int[] row : matrix) {
-            for (int elem : row) {
-                System.out.print(elem + " ");
-            }
-            System.out.println();
-        }
+//         for (int[] row : matrix) {
+//             for (int elem : row) {
+//                 System.out.print(elem + " ");
+//             }
+//             System.out.println();
+//         }
+//     }
+// }
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+class Solution
+{
+    public static void main(String args[]) throws IOException
+    {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        char str = bf.read();
+        bf.readLine();
+        String line = bf.readLine();
+        System.out.println(str);
+        System.out.println(line);
     }
 }

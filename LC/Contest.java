@@ -530,3 +530,34 @@
 // 		return res;
 // 	}
 // }
+
+class Solution {
+    public int vowelConsonantScore(String s) {
+        int c  = 0 , v =0;
+        for(char ch : s.toCharArray())
+            {
+                if(isVowel(ch))
+                        v++;
+                else
+                {
+                    if(ch>= 97 && ch <= 122)
+                    c++;
+                }
+            }
+        if(c > 0)
+        {
+            int score = (int)Math.floor(v/c);
+            return score;
+        }
+        else
+            return 0;
+    }
+    boolean isVowel(char c)
+    {
+        return c =='a'||c =='e'||c =='i'||c =='o'||c =='u';
+    }
+    public static void main(String args[])
+    {
+    	System.out.println(new Solution().vowelConsonantScore("au 123"));
+    }
+}
