@@ -1207,79 +1207,204 @@
 
 
 // leetcode problem statement separateSquares
-class Solution
-{
-	double separateSquares(int squares[][])
-	{
-		double totalArea = getTotalArea(squares);
-		double target = totalArea / 2.0;
+// class Solution
+// {
+// 	double separateSquares(int squares[][])
+// 	{
+// 		double totalArea = getTotalArea(squares);
+// 		double target = totalArea / 2.0;
 
-		double low = getMinY(squares);
-		double high = getMaxY(squares);
+// 		double low = getMinY(squares);
+// 		double high = getMaxY(squares);
 
-		for(int i = 0 ; i < 60 ; i++)
-		{
-			double mid = low + (high-low)/2.0;
-			if(areaBelow(mid,squares)<target)
-					low = mid;
-				else
-					high = mid;
-		}
-		return high;
-	}
+// 		for(int i = 0 ; i < 60 ; i++)
+// 		{
+// 			double mid = low + (high-low)/2.0;
+// 			if(areaBelow(mid,squares)<target)
+// 					low = mid;
+// 				else
+// 					high = mid;
+// 		}
+// 		return high;
+// 	}
 	
-	double getTotalArea(int squares[][])
-	{
-		double area = 0;
-		for(int square[] : squares)
-		{
-			double length = square[2];
-			area += length*length;
-		}
-		return area;
-	}
-	 private double getMinY(int[][] squares) {
-        double minY = Double.MAX_VALUE;
-        for (int[] sq : squares) {
-            minY = Math.min(minY, sq[1]);
+// 	double getTotalArea(int squares[][])
+// 	{
+// 		double area = 0;
+// 		for(int square[] : squares)
+// 		{
+// 			double length = square[2];
+// 			area += length*length;
+// 		}
+// 		return area;
+// 	}
+// 	 private double getMinY(int[][] squares) {
+//         double minY = Double.MAX_VALUE;
+//         for (int[] sq : squares) {
+//             minY = Math.min(minY, sq[1]);
+//         }
+//         return minY;
+//     }
+
+//     // Maximum possible y-value
+//     private double getMaxY(int[][] squares) {
+//         double maxY = Double.MIN_VALUE;
+//         for (int[] sq : squares) {
+//             maxY = Math.max(maxY, sq[1] + sq[2]);
+//         }
+//         return maxY;
+//     }
+//         private double areaBelow(double H, int[][] squares) {
+//         double area = 0;
+
+//         for (int[] sq : squares) {
+//             double y = sq[1];
+//             double l = sq[2];
+
+//             if (H <= y) {
+//                 // line is below square
+//                 continue;
+//             } else if (H >= y + l) {
+//                 // square fully below
+//                 area += l * l;
+//             } else {
+//                 // line cuts the square
+//                 area += l * (H - y);
+//             }
+//         }
+
+//         return area;
+//     }
+//     public static void main(String args[])
+//     {
+//     	int squares[][] = {
+//     		{0,0,1},{2,2,1}
+//     	};
+//     	System.out.println(new Solution().separateSquares(squares));
+//     }
+// }
+
+// minimum pair removal to make sorted array
+import java.util.*;
+class Solution {
+
+    static class Pair {
+        long sum;
+        int idx;
+
+        Pair(long sum, int idx) {
+            this.sum = sum;
+            this.idx = idx;
         }
-        return minY;
+
+        public boolean equals(Pair p) {
+            return sum == p.sum && idx == p.idx;
+        }
     }
 
-    // Maximum possible y-value
-    private double getMaxY(int[][] squares) {
-        double maxY = Double.MIN_VALUE;
-        for (int[] sq : squares) {
-            maxY = Math.max(maxY, sq[1] + sq[2]);
+    public int minimumPairRemoval(int[] nums) {
+        int n = nums.length;
+
+        // {a, b, c, d} -> {a, b+c, d}
+        long[] temp = new long[n];
+        for (int i = 0; i < n; i++) {
+            temp[i] = nums[i];
         }
-        return maxY;
-    }
-        private double areaBelow(double H, int[][] squares) {
-        double area = 0;
 
-        for (int[] sq : squares) {
-            double y = sq[1];
-            double l = sq[2];
-
-            if (H <= y) {
-                // line is below square
-                continue;
-            } else if (H >= y + l) {
-                // square fully below
-                area += l * l;
-            } else {
-                // line cuts the square
-                area += l * (H - y);
+        TreeSet<Pair> minPairSet = new TreeSet<>(
+            (a, b) -> {
+                if (a.sum != b.sum) return Long.compare(a.sum, b.sum);
+                return Integer.compare(a.idx, b.idx);
             }
+        );
+
+        int[] nextIndex = new int[n];
+        int[] prevIndex = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            nextIndex[i] = i + 1;
+            prevIndex[i] = i - 1;
         }
 
-        return area;
+        int badPairs = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (temp[i] > temp[i + 1]) {
+                badPairs++;
+            }
+            minPairSet.add(new Pair(temp[i] + temp[i + 1], i));
+        }
+
+        int operations = 0;
+
+        while (badPairs > 0) {
+
+            Pair cur = minPairSet.first();
+            minPairSet.remove(cur);
+
+            int first = cur.idx;
+            int second = nextIndex[first];
+
+            int first_left = prevIndex[first];
+            int second_right = nextIndex[second];
+
+            if (temp[first] > temp[second]) {
+                badPairs--;
+            }
+
+            // {d, (a, b)}
+            if (first_left >= 0) {
+                if (temp[first_left] > temp[first] &&
+                    temp[first_left] <= temp[first] + temp[second]) {
+                    badPairs--;
+                }
+                else if (temp[first_left] <= temp[first] &&
+                         temp[first_left] > temp[first] + temp[second]) {
+                    badPairs++;
+                }
+            }
+
+            // {(a, b), d}
+            if (second_right < n) {
+                if (temp[second_right] >= temp[second] &&
+                    temp[second_right] < temp[first] + temp[second]) {
+                    badPairs++;
+                }
+                else if (temp[second_right] < temp[second] &&
+                         temp[second_right] >= temp[first] + temp[second]) {
+                    badPairs--;
+                }
+            }
+
+            if (first_left >= 0) {
+                minPairSet.remove(
+                    new Pair(temp[first_left] + temp[first], first_left)
+                );
+                minPairSet.add(
+                    new Pair(temp[first_left] + temp[first] + temp[second], first_left)
+                );
+            }
+
+            if (second_right < n) {
+                minPairSet.remove(
+                    new Pair(temp[second] + temp[second_right], second)
+                );
+                minPairSet.add(
+                    new Pair(temp[first] + temp[second] + temp[second_right], first)
+                );
+                prevIndex[second_right] = first;
+            }
+
+            nextIndex[first] = second_right;
+            temp[first] += temp[second];
+
+            operations++;
+        }
+
+        return operations;
     }
     public static void main(String args[])
     {
-    	int squares[][] = {
-    		{0,0,1},{2,2,1}
-    	};
-    	System.out.println(new Solution().separateSquares(squares));
+    	int nums[] = {5,2,3,1};
+    	System.out.println(new Solution().minimumPairRemoval(nums));
     }
 }
