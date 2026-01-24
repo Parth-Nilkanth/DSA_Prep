@@ -1284,127 +1284,148 @@
 //     }
 // }
 
-// minimum pair removal to make sorted array
+// // minimum pair removal to make sorted array
+// import java.util.*;
+// class Solution {
+
+//     static class Pair {
+//         long sum;
+//         int idx;
+
+//         Pair(long sum, int idx) {
+//             this.sum = sum;
+//             this.idx = idx;
+//         }
+
+//         public boolean equals(Pair p) {
+//             return sum == p.sum && idx == p.idx;
+//         }
+//     }
+
+//     public int minimumPairRemoval(int[] nums) {
+//         int n = nums.length;
+
+//         // {a, b, c, d} -> {a, b+c, d}
+//         long[] temp = new long[n];
+//         for (int i = 0; i < n; i++) {
+//             temp[i] = nums[i];
+//         }
+
+//         TreeSet<Pair> minPairSet = new TreeSet<>(
+//             (a, b) -> {
+//                 if (a.sum != b.sum) return Long.compare(a.sum, b.sum);
+//                 return Integer.compare(a.idx, b.idx);
+//             }
+//         );
+
+//         int[] nextIndex = new int[n];
+//         int[] prevIndex = new int[n];
+
+//         for (int i = 0; i < n; i++) {
+//             nextIndex[i] = i + 1;
+//             prevIndex[i] = i - 1;
+//         }
+
+//         int badPairs = 0;
+//         for (int i = 0; i < n - 1; i++) {
+//             if (temp[i] > temp[i + 1]) {
+//                 badPairs++;
+//             }
+//             minPairSet.add(new Pair(temp[i] + temp[i + 1], i));
+//         }
+
+//         int operations = 0;
+
+//         while (badPairs > 0) {
+
+//             Pair cur = minPairSet.first();
+//             minPairSet.remove(cur);
+
+//             int first = cur.idx;
+//             int second = nextIndex[first];
+
+//             int first_left = prevIndex[first];
+//             int second_right = nextIndex[second];
+
+//             if (temp[first] > temp[second]) {
+//                 badPairs--;
+//             }
+
+//             // {d, (a, b)}
+//             if (first_left >= 0) {
+//                 if (temp[first_left] > temp[first] &&
+//                     temp[first_left] <= temp[first] + temp[second]) {
+//                     badPairs--;
+//                 }
+//                 else if (temp[first_left] <= temp[first] &&
+//                          temp[first_left] > temp[first] + temp[second]) {
+//                     badPairs++;
+//                 }
+//             }
+
+//             // {(a, b), d}
+//             if (second_right < n) {
+//                 if (temp[second_right] >= temp[second] &&
+//                     temp[second_right] < temp[first] + temp[second]) {
+//                     badPairs++;
+//                 }
+//                 else if (temp[second_right] < temp[second] &&
+//                          temp[second_right] >= temp[first] + temp[second]) {
+//                     badPairs--;
+//                 }
+//             }
+
+//             if (first_left >= 0) {
+//                 minPairSet.remove(
+//                     new Pair(temp[first_left] + temp[first], first_left)
+//                 );
+//                 minPairSet.add(
+//                     new Pair(temp[first_left] + temp[first] + temp[second], first_left)
+//                 );
+//             }
+
+//             if (second_right < n) {
+//                 minPairSet.remove(
+//                     new Pair(temp[second] + temp[second_right], second)
+//                 );
+//                 minPairSet.add(
+//                     new Pair(temp[first] + temp[second] + temp[second_right], first)
+//                 );
+//                 prevIndex[second_right] = first;
+//             }
+
+//             nextIndex[first] = second_right;
+//             temp[first] += temp[second];
+
+//             operations++;
+//         }
+
+//         return operations;
+//     }
+//     public static void main(String args[])
+//     {
+//     	int nums[] = {5,2,3,1};
+//     	System.out.println(new Solution().minimumPairRemoval(nums));
+//     }
+// }
+
 import java.util.*;
-class Solution {
-
-    static class Pair {
-        long sum;
-        int idx;
-
-        Pair(long sum, int idx) {
-            this.sum = sum;
-            this.idx = idx;
-        }
-
-        public boolean equals(Pair p) {
-            return sum == p.sum && idx == p.idx;
-        }
-    }
-
-    public int minimumPairRemoval(int[] nums) {
-        int n = nums.length;
-
-        // {a, b, c, d} -> {a, b+c, d}
-        long[] temp = new long[n];
-        for (int i = 0; i < n; i++) {
-            temp[i] = nums[i];
-        }
-
-        TreeSet<Pair> minPairSet = new TreeSet<>(
-            (a, b) -> {
-                if (a.sum != b.sum) return Long.compare(a.sum, b.sum);
-                return Integer.compare(a.idx, b.idx);
-            }
-        );
-
-        int[] nextIndex = new int[n];
-        int[] prevIndex = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            nextIndex[i] = i + 1;
-            prevIndex[i] = i - 1;
-        }
-
-        int badPairs = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if (temp[i] > temp[i + 1]) {
-                badPairs++;
-            }
-            minPairSet.add(new Pair(temp[i] + temp[i + 1], i));
-        }
-
-        int operations = 0;
-
-        while (badPairs > 0) {
-
-            Pair cur = minPairSet.first();
-            minPairSet.remove(cur);
-
-            int first = cur.idx;
-            int second = nextIndex[first];
-
-            int first_left = prevIndex[first];
-            int second_right = nextIndex[second];
-
-            if (temp[first] > temp[second]) {
-                badPairs--;
-            }
-
-            // {d, (a, b)}
-            if (first_left >= 0) {
-                if (temp[first_left] > temp[first] &&
-                    temp[first_left] <= temp[first] + temp[second]) {
-                    badPairs--;
-                }
-                else if (temp[first_left] <= temp[first] &&
-                         temp[first_left] > temp[first] + temp[second]) {
-                    badPairs++;
-                }
-            }
-
-            // {(a, b), d}
-            if (second_right < n) {
-                if (temp[second_right] >= temp[second] &&
-                    temp[second_right] < temp[first] + temp[second]) {
-                    badPairs++;
-                }
-                else if (temp[second_right] < temp[second] &&
-                         temp[second_right] >= temp[first] + temp[second]) {
-                    badPairs--;
-                }
-            }
-
-            if (first_left >= 0) {
-                minPairSet.remove(
-                    new Pair(temp[first_left] + temp[first], first_left)
-                );
-                minPairSet.add(
-                    new Pair(temp[first_left] + temp[first] + temp[second], first_left)
-                );
-            }
-
-            if (second_right < n) {
-                minPairSet.remove(
-                    new Pair(temp[second] + temp[second_right], second)
-                );
-                minPairSet.add(
-                    new Pair(temp[first] + temp[second] + temp[second_right], first)
-                );
-                prevIndex[second_right] = first;
-            }
-
-            nextIndex[first] = second_right;
-            temp[first] += temp[second];
-
-            operations++;
-        }
-
-        return operations;
-    }
-    public static void main(String args[])
-    {
-    	int nums[] = {5,2,3,1};
-    	System.out.println(new Solution().minimumPairRemoval(nums));
-    }
+class Solution
+{
+	int minimumSum(int nums[])
+	{
+		Arrays.sort(nums);
+		int n = nums.length;
+		int maxsum = 0;
+		for(int i = 0 ; i < n/ 2 ; i++)
+		{
+			maxsum = Math.max(maxsum , nums[i] + nums[n-1-i]);
+		}
+		return maxsum;
+	}
+	public static void main(String args[])
+	{
+		int nums[] = {1,2,3,5,8,9};
+		System.out.println(new Solution().minimumSum(nums));
+	}
 }
