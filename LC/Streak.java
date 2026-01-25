@@ -1409,23 +1409,45 @@
 //     }
 // }
 
-import java.util.*;
+// import java.util.*;
+// class Solution
+// {
+// 	int minimumSum(int nums[])
+// 	{
+// 		Arrays.sort(nums);
+// 		int n = nums.length;
+// 		int maxsum = 0;
+// 		for(int i = 0 ; i < n/ 2 ; i++)
+// 		{
+// 			maxsum = Math.max(maxsum , nums[i] + nums[n-1-i]);
+// 		}
+// 		return maxsum;
+// 	}
+// 	public static void main(String args[])
+// 	{
+// 		int nums[] = {1,2,3,5,8,9};
+// 		System.out.println(new Solution().minimumSum(nums));
+// 	}
+// }
+
+import java.util.Arrays;
 class Solution
 {
-	int minimumSum(int nums[])
+	public int minimumDifference(int nums[] , int k )
 	{
-		Arrays.sort(nums);
+		int ans = Integer.MAX_VALUE;
 		int n = nums.length;
-		int maxsum = 0;
-		for(int i = 0 ; i < n/ 2 ; i++)
+		Arrays.sort(nums);
+		for(int i = 0 ; i + k -1 < n ; i++)
 		{
-			maxsum = Math.max(maxsum , nums[i] + nums[n-1-i]);
+			ans = Math.min(ans , nums[i+k-1] - nums[i]);
 		}
-		return maxsum;
+		return ans;
 	}
 	public static void main(String args[])
 	{
-		int nums[] = {1,2,3,5,8,9};
-		System.out.println(new Solution().minimumSum(nums));
+		int nums[] = {9,4,1,7};
+		int k =2;
+		System.out.println(new Solution().minimumDifference(nums,k));
 	}
 }
