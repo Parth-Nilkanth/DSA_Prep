@@ -1430,27 +1430,34 @@
 // 	}
 // }
 
-import java.util.Arrays;
+// import java.util.Arrays;
+// class Solution
+// {
+// 	public int minimumDifference(int nums[] , int k )
+// 	{
+// 		int ans = Integer.MAX_VALUE;
+// 		int n = nums.length;
+// 		Arrays.sort(nums);
+// 		for(int x : nums)
+// 				System.out.print(x+" ");
+// 		System.out.println();		
+// 		for(int i = 0 ; i  < n - k +1 ; i++)
+// 		{
+// 			ans = Math.min(ans , nums[i+k-1] - nums[i]);
+// 		}
+// 		return ans;
+// 	}
+// 	public static void main(String args[])
+// 	{
+// 		int nums[] = {9,4,1,7,56,78,9};
+// 		int k =2;
+// 		System.out.println(new Solution().minimumDifference(nums,k));
+// 	}
+// }
 class Solution
 {
-	public int minimumDifference(int nums[] , int k )
-	{
-		int ans = Integer.MAX_VALUE;
-		int n = nums.length;
-		Arrays.sort(nums);
-		for(int x : nums)
-				System.out.print(x+" ");
-		System.out.println();		
-		for(int i = 0 ; i  < n - k +1 ; i++)
-		{
-			ans = Math.min(ans , nums[i+k-1] - nums[i]);
-		}
-		return ans;
-	}
 	public static void main(String args[])
 	{
-		int nums[] = {9,4,1,7,56,78,9};
-		int k =2;
-		System.out.println(new Solution().minimumDifference(nums,k));
+		System.out.println(5 % -4);
 	}
 }
