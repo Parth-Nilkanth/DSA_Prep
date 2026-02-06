@@ -854,32 +854,165 @@ class Solution {
 // nums2. A valid sum combination is made by adding one element
  // from nums1 and one element from nums2.
   // Return the answer in non-increasing order.
-import java.util.*;
-class Solution
-{
-    List<Integer> maxKSums(int nums1[] , int nums2[] , int k)
-    {
-        List<Integer> result = new ArrayList<>();
-        PriorityQueue<Integer> heap = new PriorityQueue<>(Collections.reverseOrder());
-        for(int i = 0 ; i < nums1.length ; i ++ )
-        {
-            for(int j = 0 ; j < nums2.length ; j++)
-            {
-                heap.add(nums1[i]+nums2[j]);
-            }
-        }
-        while(k-- > 0)
-        {
-            result.add(heap.poll());
-        }
-        return result;
-    }
+// import java.util.*;
+// class Solution
+// {
+//     List<Integer> maxKSums(int nums1[] , int nums2[] , int k)
+//     {
+//         List<Integer> result = new ArrayList<>();
+//         PriorityQueue<Integer> heap = new PriorityQueue<>(Collections.reverseOrder());
+//         for(int i = 0 ; i < nums1.length ; i ++ )
+//         {
+//             for(int j = 0 ; j < nums2.length ; j++)
+//             {
+//                 heap.add(nums1[i]+nums2[j]);
+//             }
+//         }
+//         while(k-- > 0)
+//         {
+//             result.add(heap.poll());
+//         }
+//         return result;
+//     }
 
-    public static void main(String args[])
-    {
-        int nums1[] = {3, 4, 5};
-        int  nums2[] = {2,6,3};
-        int k = 2;
-        System.out.println(new Solution().maxKSums(nums1,nums2,k));
-    }
-}
+//     public static void main(String args[])
+//     {
+//         int nums1[] = {3, 4, 5};
+//         int  nums2[] = {2,6,3};
+//         int k = 2;
+//         System.out.println(new Solution().maxKSums(nums1,nums2,k));
+//     }
+// }
+
+
+
+
+// -----------------------------Greedy Method-----------------------
+// fractional knapsack solution
+// class Solution
+// {
+//     static void swap(int arr[] , int i , int j)
+//     {
+//         int temp = arr[i];
+//         arr[i] = arr[j];
+//         arr[j] = temp;
+//     }
+//     static void swap(double arr[] , int i , int j)
+//     {
+//         double temp = arr[i];
+//         arr[i] = arr[j];
+//         arr[j] = temp;
+//     }
+//     // sort
+//     static void sort(int val[] , int wt[] , double ratio[])
+//     {
+//         for(int i = 0 ; i < wt.length ; i++)
+//         {
+//             for(int j = i+1  ; j < wt.length ; j++)
+//             {
+//                 if(ratio[i] < ratio[j])
+//                 {
+//                     swap(val,i,j);
+//                     swap(wt,i,j);
+//                     swap(ratio,i,j);
+//                 }
+//             }
+//         }
+//         // display wt and val
+//         for(int i = 0 ; i < wt.length ; i ++)
+//             System.out.println(wt[i]+":"+val[i]);
+//     }
+
+//     static double fractionalKnapSack(int val[] , int wt[] , int capacity)
+//     {
+//         int n = val.length;
+//         double ratio[] = new double[n];
+//         for(int i = 0 ; i < n ; i++)
+//         {
+//             ratio[i] = (double)val[i]/wt[i];
+//         }
+//         // sort weight and values according to ratio
+//         sort(val,wt,ratio);
+//         int total=0;
+//         double result = 0;
+//         for(int i = 0 ; i < n ; i++)
+//         {
+//             if(total + wt[i] <=capacity){
+//                 result+=val[i];
+//                 total+=wt[i];   
+//             }
+//             else
+//             {
+//                 int rem = capacity - total;
+//                 result+= (double)rem/wt[i] * (double)val[i];
+//                 total+=rem;
+//                 break;
+//             }
+//         }
+//         return result;
+//     }
+//     public static void main(String args[])
+//     {
+//         int val[] = {60,100};
+//         int wt[] = {10,20};
+//         int capacity = 50;
+//         double result = fractionalKnapSack(val , wt , capacity);
+//         System.out.println(result);
+//     }
+// }
+
+
+// fractional knapsack : optimal 
+// import java.util.Arrays;
+// class Item {
+//     int value;
+//     int weight;
+//     double ratio;
+
+//     Item(int value, int weight) {
+//         this.value = value;
+//         this.weight = weight;
+//         this.ratio = (double) value / weight;
+//     }
+// }
+
+// class Solution {
+
+//     static double fractionalKnapSack(int[] val, int[] wt, int capacity) {
+
+//         int n = val.length;
+//         Item[] items = new Item[n];
+
+//         for (int i = 0; i < n; i++) {
+//             items[i] = new Item(val[i], wt[i]);
+//         }
+
+//         // Sort by ratio descending → O(n log n)
+//         Arrays.sort(items, (a, b) -> Double.compare(b.ratio, a.ratio));
+
+//         double result = 0.0;
+//         int totalWeight = 0;
+
+//         for (Item item : items) {
+//             if (totalWeight + item.weight <= capacity) {
+//                 result += item.value;
+//                 totalWeight += item.weight;
+//             } else {
+//                 int remaining = capacity - totalWeight;
+//                 result += item.ratio * remaining;
+//                 break;
+//             }
+//         }
+
+//         return result;
+//     }
+
+//     public static void main(String[] args) {
+//         int[] val = {60, 100};
+//         int[] wt = {10, 20};
+//         int capacity = 50;
+
+//         System.out.println(fractionalKnapSack(val, wt, capacity));
+//     }
+// }
+
