@@ -1016,3 +1016,66 @@ class Solution {
 //     }
 // }
 
+// Leetcode potd: 
+// // make string balanced
+
+// import java.util.Stack;
+// class Solution
+// {
+//     public static void main(String argsp[])
+//     {
+//         String s = "abaab";
+//         int ans = 0;
+//         Stack<Character> stack = new Stack<>();
+//         for(char c : s.toCharArray())
+//         {   
+//             // top is b and current is a
+//             if(!stack.isEmpty() && stack.peek()=='b' && c=='a')
+//             {
+//                 ans++;
+//                 stack.pop();
+//             }
+//             else
+//                 stack.push(c);
+//         }
+//         return ans;
+//     }
+// }
+
+// class Solution
+// {
+//     int height(TreeNode root)
+//     {
+//         if(root==null)
+//                 return 0;
+//         int lh = height(root.left);
+//         int rh = height(root.right);
+//         return Math.max(lh,rh)+1;
+//     }
+//     boolean isBalanced(TreeNode root)
+//     {
+//         if(root==null)
+//                 return true;
+//         int lh = height(root.left);
+//         int rh = height(root.right);
+//         if(Math.abs(lh-rh) > 1)
+//             return false;
+//         boolean lbal = isBalanced(root.left);
+//         boolean rbal = isBalanced(root.right);
+//         return lbal && rbal;
+//     }
+//     public static void main(String args[])
+//     {
+
+//     }
+// }
+
+class Solution
+{
+    public static void main(String args[])
+    {
+        
+        Object o = new Integer(1);
+
+    }
+}
