@@ -1070,12 +1070,419 @@ class Solution {
 //     }
 // }
 
-class Solution
-{
-    public static void main(String args[])
-    {
-        
-        Object o = new Integer(1);
 
+// ------------------------------------- greedy 
+// N meetings in one room
+// Problem Statement: There is one meeting room in a firm.
+// You are given two arrays, start and end each of size N.
+// For an index ‘i’, start[i] denotes the starting time of the
+// ith meeting while end[i] will denote the ending time of the
+// ith meeting. Find the maximum number of meetings that can be accommodated 
+// if only one meeting can happen in the room at a particular time.
+ // Print the order in which these meetings will be performed.
+// example :
+// Input: N = 6,  start[] = {1,3,0,5,8,5}, end[] =  {2,4,5,7,9,9}
+// Output: [1, 2, 4, 5]
+
+// import java.util.*;
+// class Meet
+// {
+//     int start;
+//     int end;
+//     int position;
+//     Meet(int start , int end, int position)
+//     {
+//         this.start = start;
+//         this.end = end;
+//         this.position = position;
+//     }
+
+//     @Override
+//     public String toString()
+//     {
+//         return start+" "+" "+end+" "+position;
+//     }
+// }
+// class Solution
+// {
+//     List<Integer> meetingOrder(int N , int start[] , int end[])
+// {
+//     // create object and sort it according to end time
+//     Meet meets[] = new Meet[N];
+//     for(int i = 0 ; i < N ; i++)
+//             meets[i] = new Meet(start[i],end[i],i);
+//     Arrays.sort(meets ,(a,b) ->  Integer.compare(a.end , b.end) );
+//     List<Integer> result = new ArrayList<>();
+//     result.add(meets[0].position);
+//     int freeTime = meets[0].end;
+//     for(int i = 1 ; i < N ; i++)
+//     {
+//         if(freeTime < meets[i].start){
+//             result.add(meets[i].position);
+//             freeTime = meets[i].end;
+//         }
+//     }
+//     // positions are zero based positions
+//     return result;
+// }
+ 
+//     public static void main(String args[])
+//     {
+//         int  N = 6,  start[] = {1,3,0,5,8,5}, end[] =  {2,4,5,7,9,9};
+//         List<Integer> result = new Solution().meetingOrder(N , start , end);
+//         System.out.println(result);
+//     }
+// }
+
+
+// Minimum number of platforms required for a railway
+// class Solution
+// {
+//     public int minPlatform(double arr[] , double dept[])
+//     {
+//         int n = arr.length;
+//         int ans = 1;
+//         for(int i = 0 ; i < n ; i++)
+//         {
+//             int count = 1;
+//             for(int j = i + 1; j < n ; j++)
+//             {
+//                 if((arr[i] >= arr[j] && arr[i] <=dept[j]) ||
+//                     (arr[j] >= arr[i] && arr[j] <=dept[i] ) )
+//                         count++;
+//             }
+//             ans = Math.max(ans , count);
+//         }
+//         return ans;
+//     }
+//      public static void main(String args[])
+//      {
+//         double arr[] = {9.00, 9.45, 9.55, 11.00, 15.00, 18.00};
+//         double dept[] = {9.20, 12.00, 11.30, 11.50, 19.00, 20.00};
+//         System.out.println(new Solution().minPlatform(arr,dept));
+//      }
+// }
+// optimal SOlution
+// import java.util.Arrays;
+// class Solution
+// {
+//     public int minPlatform(double arr[] , double dept[])
+//     {
+//         Arrays.sort(arr);
+//         Arrays.sort(dept);
+//         int i = 0  , j  =0;
+//         int n = arr.length;
+//         int count = 0;
+//         int maxcount  =0;
+//         while( i < n  && j < n)
+//         {
+//             if(arr[i]<=dept[j])
+//             {
+//                 count++;
+//                 i++;
+//             }
+//             else
+//             {
+//                 count--;
+//                 j++;
+//             }
+//             maxcount = Math.max(count , maxcount);
+//         }
+//         return maxcount;
+
+//     }
+//      public static void main(String args[])
+//      {
+//         double arr[] = {9.00, 9.45, 9.55, 11.00, 15.00, 18.00};
+//         double dept[] = {9.20, 12.00, 11.30, 11.50, 19.00, 20.00};
+//         System.out.println(new Solution().minPlatform(arr,dept));
+//      }
+// }
+
+
+// job sequencing problem
+// class Job
+// {
+//     int i ;
+//     int d;
+//     int p;
+//     Job(int i , int d , int p)
+//     {
+//         this.i = i;
+//         this.d = d;
+//         this.p = p;
+//     }
+// }
+// class Solution
+// {
+//     public static void main(String args[])
+//     {
+//         System.out.println(new Solution().jobSequencing())
+//     }
+// }
+
+
+
+// // java labelled statement
+// class Solution
+// {
+//     public static void main(String args[])
+//     {
+//         outer:
+//         for(int i = 0 ; i < 5 ; i ++)
+//         {
+//             for(int j = 0 ; j < 5 ; j++)
+//             {
+//                 System.out.println(i+" "+j);
+//                 if(i==3 &&  j==4)
+//                         break outer;
+//             }
+//         }
+//     }
+// }
+
+// import java.util.Arrays;
+// class Solution
+// {
+//     int avgWaiting(int p[])
+//     {
+//         Arrays.sort(p);
+//         int tat = 0;
+//         int sum = 0;
+//         for(int i = 0 ; i < p.length -1 ; i++)
+//         {
+//             int ct = p[i] + tat;
+//             sum+=ct;
+//             tat+=p[i];
+//         }
+//         return sum / p.length;
+//     }
+//     public static void main(String args[])
+//     {
+//         int p[] = {3,1,4,2,5};   
+//         System.out.println(new Solution().avgWaiting(p));
+//     }
+// }
+
+
+
+
+// ------------------------------------Tree Series
+// // tree traversals
+// import java.util.*;
+// // Node structure for the binary tree
+// class Node {
+//     int data;
+//     Node left;
+//     Node right;
+
+//     // Constructor to initialize
+//     // the node with a value
+//     Node(int val) {
+//         data = val;
+//         left = null;
+//         right = null;
+//     }
+// }
+
+// // Solution class containing the traversal function
+// class Pair<K,V>
+// {
+//     K key;
+//     V value;
+//     Pair(K key, V value)    
+//     {
+//         this.key = key;
+//         this.value = value;
+//     }
+//     public K getKey()
+//     {
+//         return key;
+//     }
+//     public V getValue()
+//     {
+//         return value;
+//     }
+//     public void setValue(V value)
+//     {
+//         this.value = value;
+//     }
+// }
+
+// class Solution {
+
+//     // Function to get the Preorder,
+//     // Inorder and Postorder traversal
+//     // Of Binary Tree in One traversal
+//     public List<List<Integer>> preInPostTraversal(Node root) {
+//         // Lists to store traversals
+//         List<Integer> pre = new ArrayList<>();
+//         List<Integer> in = new ArrayList<>();
+//         List<Integer> post = new ArrayList<>();
+
+//         // If the tree is empty,
+//         // return empty traversals
+//         if (root == null) {
+//             return new ArrayList<>();
+//         }
+
+//         // Stack to maintain nodes
+//         // and their traversal state
+//         Stack<Pair<Node, Integer>> st = new Stack<>();
+
+//         // Start with the root node
+//         // and state 1 (preorder)
+//         st.push(new Pair<>(root, 1));
+
+//         while (!st.empty()) {
+//             Pair<Node, Integer> it = st.pop();
+
+//             // this is part of pre
+//             if (it.getValue() == 1) {
+//                 // Store the node's data
+//                 // in the preorder traversal
+//                 pre.add(it.getKey().data);
+//                 // Move to state 2
+//                 // (inorder) for this node
+//                 it.setValue(2);
+//                 // Push the updated state
+//                 // back onto the stack
+//                 st.push(it);
+
+//                 // Push left child onto
+//                 // the stack for processing
+//                 if (it.getKey().left != null) {
+//                     st.push(new Pair<>(it.getKey().left, 1));
+//                 }
+//             }
+
+//             // this is a part of in
+//             else if (it.getValue() == 2) {
+//                 // Store the node's data
+//                 // in the inorder traversal
+//                 in.add(it.getKey().data);
+//                 // Move to state 3
+//                 // (postorder) for this node
+//                 it.setValue(3);
+//                 // Push the updated state
+//                 // back onto the stack
+//                 st.push(it);
+
+//                 // Push right child onto
+//                 // the stack for processing
+//                 if (it.getKey().right != null) {
+//                     st.push(new Pair<>(it.getKey().right, 1));
+//                 }
+//             }
+
+//             // this is part of post
+//             else {
+//                 // Store the node's data
+//                 // in the postorder traversal
+//                 post.add(it.getKey().data);
+//             }
+//         }
+
+//         // Returning the traversals
+//         List<List<Integer>> result = new ArrayList<>();
+//         result.add(pre);
+//         result.add(in);
+//         result.add(post);
+//         return result;
+//     }
+
+//     // Function to print the elements of a list
+//     public void printList(List<Integer> list) {
+//         for (int num : list) {
+//             System.out.print(num + " ");
+//         }
+//         System.out.println();
+//     }
+// }
+
+// // Main class
+//  class Main {
+//     public static void main(String[] args) {
+//         // Creating a sample binary tree
+//         Node root = new Node(1);
+//         root.left = new Node(2);
+//         root.right = new Node(3);
+//         root.left.left = new Node(4);
+//         root.left.right = new Node(5);
+
+//         // Create object of Solution class
+//         Solution sol = new Solution();
+
+//         // Getting the pre-order, in-order,
+//         // and post-order traversals
+//         List<List<Integer>> traversals = sol.preInPostTraversal(root);
+
+//         // Extracting the traversals
+//         List<Integer> pre = traversals.get(0);
+//         List<Integer> in = traversals.get(1);
+//         List<Integer> post = traversals.get(2);
+
+//         // Printing the traversals
+//         System.out.print("Preorder traversal: ");
+//         sol.printList(pre);
+
+//         System.out.print("Inorder traversal: ");
+//         sol.printList(in);
+
+//         System.out.print("Postorder traversal: ");
+//         sol.printList(post);
+//     }
+// }
+
+
+// level order traversal
+
+  // Definition for a binary tree node.
+import java.util.*;
+   class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
+ 
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+    Queue<TreeNode> queue = new ArrayDeque<>();
+    List<List<Integer>> list = new ArrayList<>();
+    if(root==null)
+            return list;
+    queue.offer(root);
+    while(!queue.isEmpty())
+    {
+        int level = queue.size();
+        List<Integer> sub = new ArrayList<>();
+        for(int i = 0 ; i < level ; i++)
+        {
+            if(queue.peek().left!=null)
+                queue.offer(queue.peek().left);
+            if(queue.peek().right!=null)
+                queue.offer(queue.peek().right);
+            sub.add(queue.poll().val);
+        }
+        list.add(sub);
+    }
+    return list;
+    }
+    public static void main(String argsp[])
+    {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        System.out.println(new Solution().levelOrder(root));
     }
 }

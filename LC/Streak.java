@@ -1454,10 +1454,14 @@
 // 		System.out.println(new Solution().minimumDifference(nums,k));
 // 	}
 // }
-class Solution
-{
-	public static void main(String args[])
-	{
-		System.out.println(5 % -4);
-	}
+
+class Solution {
+    public int reverseBits(int n) {
+       
+    }
+    public static void main(String args[])
+    {
+    	int n = 43261596;
+    	System.out.println(new Solution().reverseBits(n));
+    }
 }
